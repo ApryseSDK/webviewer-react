@@ -18,7 +18,7 @@ function DocumentViewer(WVOptions: OptionsObject) {
   const initOptions: any = {} // TODO: update type
   incomingOptionKeys.forEach(function (key: string) {
     if (validWVOptions[key]) {
-      initOptions[key] = WVOptions[key]
+      //initOptions[key] = WVOptions[key]
     }
   })
 
