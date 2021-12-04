@@ -3,17 +3,17 @@ import WebViewer from '@pdftron/webviewer'
 import React, { useRef, useEffect } from 'react'
 
 interface OptionsObject {
-  path: string
+  path: string,
   id: number
 }
 
-function DocumentViewer(WVOptions: OptionsObject) {
-  const viewer = useRef(null)
+function DocumentViewer() {
+  const viewer = useRef<HTMLDivElement>(null)
 
-  if (typeof WVOptions !== 'object') {
+  /*if (typeof WVOptions !== 'object') {
     return
-  }
-  const incomingOptionKeys = Object.keys(WVOptions)
+  }*/
+  const incomingOptionKeys = Object.keys({})
   const validWVOptions: any = { haha: '1' } // TODO: update type
   const initOptions: any = {} // TODO: update type
   incomingOptionKeys.forEach(function (key: string) {
@@ -23,16 +23,22 @@ function DocumentViewer(WVOptions: OptionsObject) {
   })
 
   useEffect(() => {
+
     WebViewer(
       {
-        path: '/webviewer/lib',
-        initialDoc: '/files/pdftron_about.pdf',
+        // TODO: correct the path
+        path: '../../public/webviewer/lib',
+        initialDoc: '/files/PDFTRON_about.pdf',
       },
+      // TODO: update type
+      // @ts-ignore:
       viewer.current
     ).then(instance => {
       const { documentViewer } = instance.Core
-      console.log('dviewer',documentViewer)
+      console.log('dviewer', documentViewer)
     })
   }, [])
-  return <div className='webviewer' ref={viewer} />
+  return <div className='webviewer' id='documentViewer' />
 }
+
+export default DocumentViewer
