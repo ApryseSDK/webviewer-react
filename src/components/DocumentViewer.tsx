@@ -23,19 +23,18 @@ function DocumentViewer() {
   })
 
   useEffect(() => {
-
     WebViewer(
       {
         // TODO: correct the path
-        path: '../../public/webviewer/lib',
-        initialDoc: '/files/PDFTRON_about.pdf',
+        path: 'webviewer/lib',
+        initialDoc: 'files/PDFTRON_about.pdf',
       },
       // TODO: update type
       // @ts-ignore:
-      viewer.current
+      document.getElementById('documentViewer')
     ).then(instance => {
       const { documentViewer } = instance.Core
-      console.log('dviewer', documentViewer)
+      console.log('dviewer')
     })
   }, [])
   return <div className='webviewer' id='documentViewer' />

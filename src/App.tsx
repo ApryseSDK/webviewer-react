@@ -1,20 +1,19 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react'
 import DocumentViewer from './components/DocumentViewer'
-import './App.css';
+import './App.css'
 
 const App = () => {
+  // if using a class, equivalent of componentDidMount
 
-    // if using a class, equivalent of componentDidMount 
+  return (
+    <div className='App'>
+      <div className='header'>React sample</div>
+      <DocumentViewer />
+    </div>
+  )
+}
 
-    return (
-        <div className="App">
-            <div className="header">React sample</div>
-            <DocumentViewer />
-        </div>
-    );
-};
-
-export default App;
+export default App
 
 /*function Inner() {
     const ref = useRef();
