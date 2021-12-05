@@ -1,6 +1,5 @@
 import WebViewer from '@pdftron/webviewer'
-
-import { useRef, useEffect } from 'react'
+import React, { useRef, useEffect } from 'react'
 
 interface OptionsObject {
   path: string,
@@ -25,9 +24,8 @@ function DocumentViewer({docUrl = ''}) {
   useEffect(() => {
     WebViewer(
       {
-        // TODO: correct the path
         path: 'webviewer/lib',
-        initialDoc: 'files/PDFTRON_about.pdf',
+        initialDoc: docUrl,
         enableFilePicker: true
       },
       // TODO: update type

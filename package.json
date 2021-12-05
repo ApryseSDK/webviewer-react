@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "esbuild --bundle src/index.js --loader:.js=jsx --outfile=www/main.js --servedir=www",
-    "build": "esbuild src/App.tsx --bundle --outfile=index.js --bundle --watch",
-    "build-dv": "esbuild src/components/DocumentViewer.tsx --bundle --outfile=out.js",
-    "build-dpv": "esbuild src/components/DocPageViewer.tsx --bundle --outfile=out.js",
+    "startdv": "esbuild --bundle examples/DocumentViewer/index.js --loader:.js=jsx --outfile=www/main.js --servedir=www",
+    "startdpv": "esbuild --bundle examples/DocPageViewer/index.js --loader:.js=jsx --outfile=www/main.js --servedir=www",
+    "builddv": "esbuild src/components/DocumentViewer.tsx --bundle --outfile=out.js",
+    "builddpv": "esbuild src/components/DocPageViewer.tsx --bundle --outfile=out.js",
     "start-dv": "",
     "start-dpv": "",
     "preparevwlib": "node copy-webviewer-file.js"
