@@ -1,32 +1,16 @@
-import React, { useRef, useEffect } from 'react'
-import DocumentViewer from './components/DocumentViewer'
-import './App.css'
+import { DocumentViewer } from './components/'
+import './App.css';
 
 const App = () => {
-  // if using a class, equivalent of componentDidMount
+
+  // if using a class, equivalent of componentDidMount 
 
   return (
-    <div className='App'>
-      <div className='header'>React sample</div>
-      <DocumentViewer />
+    <div className="App">
+      <div className="header">React sample</div>
+      <DocumentViewer docUrl={'files/PDFTRON_about.pdf'}/>
     </div>
-  )
-}
+  );
+};
 
-export default App
-
-/*function Inner() {
-    const ref = useRef();
-    const [instance, setInstance] = useInstance();
-    useEffect(() => {
-        WebViewer({
-            // options
-        }, ref.current).then(instance => {
-            setInstance(instance)
-        })
-    }, [])
-
-    return (
-        <div ref={ref}></div>
-    )
-}*/
+export default App;

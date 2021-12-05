@@ -1,13 +1,13 @@
 import WebViewer from '@pdftron/webviewer'
 
-import React, { useRef, useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 
 interface OptionsObject {
   path: string,
   id: number
 }
 
-function DocumentViewer() {
+function DocumentViewer({docUrl = ''}) {
   const viewer = useRef<HTMLDivElement>(null)
 
   /*if (typeof WVOptions !== 'object') {
@@ -28,16 +28,17 @@ function DocumentViewer() {
         // TODO: correct the path
         path: 'webviewer/lib',
         initialDoc: 'files/PDFTRON_about.pdf',
+        enableFilePicker: true
       },
       // TODO: update type
       // @ts-ignore:
-      document.getElementById('documentViewer')
+      viewer.current
     ).then(instance => {
       const { documentViewer } = instance.Core
       console.log('dviewer')
     })
   }, [])
-  return <div className='webviewer' id='documentViewer' />
+  return <div className='webviewer' ref={viewer}/>
 }
 
 export default DocumentViewer
