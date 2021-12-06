@@ -9,7 +9,7 @@ esbuild
     minify: false,
     splitting: true,
     format: 'esm',
-    target: ['esnext'],
+    target: ['es6'],
     external:['react','@pdftron/webviewer']
   })
   .catch(() => process.exit(1))
