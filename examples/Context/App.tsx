@@ -1,6 +1,6 @@
 import React from 'react'
 import { DocumentViewerProvider } from '../../src/components/'
-import Display from './Display'
+import Body from './Body'
 import '../_css/App.css'
 
 const App = () => {
@@ -10,7 +10,7 @@ const App = () => {
     <DocumentViewerProvider>
       <div className='App'>
         <div className='header'>React sample</div>
-        <Display />
+        <Body />
       </div>
     </DocumentViewerProvider>
   )
