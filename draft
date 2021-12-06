@@ -70,6 +70,8 @@ function Inner() {
   )
 }
 
+
+
 // Requirement 3, React PDF clone
 // Calls setInstance internally
 function Inner() {

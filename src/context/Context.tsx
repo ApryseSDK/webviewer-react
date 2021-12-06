@@ -1,6 +1,6 @@
 import React, {
   useState,
-  createContext,
+  createContext
 } from 'react'
 import WebViewer, { WebViewerInstance } from '@pdftron/webviewer'
 
@@ -9,18 +9,22 @@ export type TProviderProp = {
 }
 
 export type TContextState = {
-  instances: Array<WebViewerInstance>
+  instances: object,
   addInstance: Function
 }
 
+export type TKeyInstancePair = {
+  [key: string]: WebViewerInstance
+}
+
 const DocumentViewerContext = createContext<TContextState>({
-  instances: [],
+  instances: {},
   addInstance: async () => {},
 })
 
 function DocumentViewerProvider({ children }: TProviderProp): JSX.Element {
 
-  const [instances, setInstances] = useState<Array<WebViewerInstance>>([])
+  const [instances, setInstances] = useState<TKeyInstancePair>({})
   const value = {instances, addInstance}
 
   async function addInstance(
@@ -36,14 +40,8 @@ function DocumentViewerProvider({ children }: TProviderProp): JSX.Element {
       },
       DVElement
     )
-    // @ts-ignore:
-    if (!window['temp11']) window['temp11'] = []
-    // @ts-ignore:
-    window['temp11'].push(instance)
-    setInstances([...instances, instance])
+    setInstances({...instances, [UID]: instance })
   }
-
-  function removeInstance(UID: string) {}
 
   return (
     <DocumentViewerContext.Provider value={value}>

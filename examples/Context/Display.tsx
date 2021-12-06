@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import useInstance from '../../src/hooks/useInstances'
+import useInstance from '../../src/context'
 
 const docs = [
   'PDFTRON_about.pdf',
@@ -16,9 +16,8 @@ const docs = [
 ]
 
 function Display() {
-    
-  const { instances, addInstance } = useInstance()
 
+  const { instances, addInstance } = useInstance()
   const [elements, setElements] = useState([])
 
   function appendNewDocumentViewer() {
@@ -33,6 +32,7 @@ function Display() {
 
   function LoadRandomDocument(key) {
     const rnd = Math.floor(Math.random() * docs.length)
+    // TODO: setup env for this
     instances[key].UI.loadDocument(`http://127.0.0.1:8000/files/${docs[rnd]}`)
   }
 

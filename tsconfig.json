@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "target": "es2016",
+    "target": "esnext",
     "jsx": "react-jsx",
     "module": "esnext",
-    "rootDir": "src",
+    "rootDir": "src/context",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -19,10 +19,9 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true
+    "noEmit": false
   },
   "include": [
-    "src",
-    "copy-webviewer-file.js"
+    "src/context"
   ]
 }

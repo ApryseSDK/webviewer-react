@@ -7,8 +7,10 @@
     "startdv": "esbuild --bundle examples/DocumentViewer/index.js --loader:.js=jsx --outfile=www/main.js --servedir=www",
     "startdpv": "esbuild --bundle examples/DocPageViewer/index.js --loader:.js=jsx --outfile=www/main.js --servedir=www",
     "startctx": "esbuild --bundle examples/Context/index.js --loader:.js=jsx --outfile=www/main.js --servedir=www",
+    "ts-types": " tsc -d --emitDeclarationOnly --outDir lib/context",
     "builddv": "esbuild src/components/DocumentViewer.tsx --bundle --outfile=out.js",
     "builddpv": "esbuild src/components/DocPageViewer.tsx --bundle --outfile=out.js",
+    "buildctx": "node ./esbuild-context.js && npm run ts-types",
     "start-dv": "",
     "start-dpv": "",
     "preparevwlib": "node copy-webviewer-file.js"
