@@ -1,3 +1,4 @@
+// @ts-ignore
 import React, {
   useState,
   createContext
@@ -32,12 +33,11 @@ function DocumentViewerProvider({ children }: TProviderProp): JSX.Element {
     UID: string,
     DVElement: HTMLElement
   ) {
-    const el = document.createElement('div')
     const instance = await WebViewer(
       {
         path: 'webviewer/lib',
         initialDoc: initialDoc,
-        disabledElements: ['header', 'toolsHeader', 'pageNavOverlay', 'textPopup']
+        disabledElements: ['header', 'toolsHeader', 'pageNavOverlay', 'textPopup', 'contextMenuPopup']
       },
       DVElement
     )

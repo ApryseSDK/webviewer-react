@@ -1,12 +1,12 @@
-import React, { useRef, useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 import useInstances from '../context'
 
-type Props = {
+export type TProps = {
   docUrl: string
   UID: string
 }
 
-function DocumentViewer({ docUrl, UID }: Props): JSX.Element {
+function DocumentViewer({ docUrl, UID }: TProps): JSX.Element {
   const viewer = useRef<HTMLDivElement>(null)
 
   const { addInstance } = useInstances()
