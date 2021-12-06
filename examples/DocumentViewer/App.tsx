@@ -1,6 +1,6 @@
 import React from 'react'
-import { DocumentViewer } from '../../src/components/'
-import { DocumentViewerProvider } from '../../src/context'
+import { DocumentViewer } from '../../lib'
+import { DocumentViewerProvider } from '../../lib'
 import '../_css/App.css'
 
 const App = () => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { DocumentViewerProvider } from '../../src/context'
+import { DocumentViewerProvider } from '../../lib'
 import Body from './Body'
 import '../_css/App.css'
 

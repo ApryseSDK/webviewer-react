@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import useInstances from '../../src/context'
+import useInstances from '../../lib'
 
 const docs = [
   'PDFTRON_about.pdf',
