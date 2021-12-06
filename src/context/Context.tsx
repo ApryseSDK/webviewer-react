@@ -19,28 +19,29 @@ export type TKeyInstancePair = {
 
 const DocumentViewerContext = createContext<TContextState>({
   instances: {},
-  addInstance: async () => {},
+  addInstance: async () => { },
 })
 
 function DocumentViewerProvider({ children }: TProviderProp): JSX.Element {
 
   const [instances, setInstances] = useState<TKeyInstancePair>({})
-  const value = {instances, addInstance}
+  const value = { instances, addInstance }
 
   async function addInstance(
     initialDoc: string,
     UID: string,
     DVElement: HTMLElement
   ) {
+    const el = document.createElement('div')
     const instance = await WebViewer(
       {
         path: 'webviewer/lib',
         initialDoc: initialDoc,
-        enableFilePicker: true,
+        disabledElements: ['header', 'toolsHeader', 'pageNavOverlay', 'textPopup']
       },
       DVElement
     )
-    setInstances({...instances, [UID]: instance })
+    setInstances({ ...instances, [UID]: instance })
   }
 
   return (

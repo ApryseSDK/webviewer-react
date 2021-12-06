@@ -1,2 +1,9 @@
-const example = 1
-export default example
+import React from "react"
+import useInstances from "../context"
+
+
+function DocPageViewer() {
+
+}
+
+export default DocPageViewer

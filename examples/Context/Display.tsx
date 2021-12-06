@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import useInstance from '../../src/context'
+import useInstances from '../../src/context'
 
 const docs = [
   'PDFTRON_about.pdf',
@@ -17,14 +17,15 @@ const docs = [
 
 function Display() {
 
-  const { instances, addInstance } = useInstance()
+  const { instances, addInstance } = useInstances()
   const [elements, setElements] = useState([])
 
   function appendNewDocumentViewer() {
     const rnd = Math.floor(Math.random() * docs.length)
     const UID = Date.now().toString(16)
     const options = {
-      initialDoc: `files/${docs[rnd]}`,
+      // TODO: setup env for this
+      initialDoc: `http://127.0.0.1:8000/files/${docs[rnd]}`,
       UID: UID,
     }
     setElements([...elements, options])
@@ -38,7 +39,7 @@ function Display() {
 
   useEffect(() => {
     if (elements.length > 0) {
-      ;(async () => {
+      ; (async () => {
         const options = elements[elements.length - 1]
         const el = document.getElementById(options.UID)
         await addInstance(options.initialDoc, options.UID, el)
