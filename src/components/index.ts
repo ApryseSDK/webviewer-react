@@ -1,3 +1,4 @@
 import DocumentViewer from "./DocumentViewer";
+import {DocumentViewerProvider} from "./Context";
 
-export { DocumentViewer }
+export { DocumentViewer, DocumentViewerProvider }

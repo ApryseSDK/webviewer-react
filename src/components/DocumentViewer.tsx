@@ -1,12 +1,11 @@
 import WebViewer from '@pdftron/webviewer'
 import React, { useRef, useEffect } from 'react'
 
-interface OptionsObject {
-  path: string,
-  id: number
+type Props = {
+  docUrl: string
 }
 
-function DocumentViewer({docUrl = ''}) {
+function DocumentViewer({docUrl = ''}: Props): JSX.Element {
   const viewer = useRef<HTMLDivElement>(null)
 
   /*if (typeof WVOptions !== 'object') {
