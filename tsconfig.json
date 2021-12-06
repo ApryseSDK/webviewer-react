@@ -1,19 +1,30 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "outDir": "lib",
+    "target": "es6",
     "jsx": "react-jsx",
     "module": "esnext",
-    "rootDir": "src/context",
+    "rootDir": "src",
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
     "lib": [
+      "es6",
       "dom",
       "dom.iterable",
       "esnext"
     ],
-    "allowJs": true,
+    "sourceMap": true,
+    "allowJs": false,
+    "declaration": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "allowSyntheticDefaultImports": true,
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
@@ -22,6 +33,10 @@
     "noEmit": false
   },
   "include": [
-    "src/context"
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "build"
   ]
 }
