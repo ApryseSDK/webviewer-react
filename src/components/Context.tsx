@@ -1,48 +1,55 @@
 import React, {
   useState,
-  useEffect,
-  useReducer,
   createContext,
-  PropsWithChildren,
 } from 'react'
 import WebViewer, { WebViewerInstance } from '@pdftron/webviewer'
 
-type TProps = {
+export type TProviderProp = {
   children: JSX.Element
-  elementForViewer: HTMLElement
-  initialDoc: string
 }
 
-const DocumentViewerContext = createContext<object>({
+export type TContextState = {
+  instances: Array<WebViewerInstance>
+  addInstance: Function
+}
+
+const DocumentViewerContext = createContext<TContextState>({
   instances: [],
-  setInstances: () => {},
+  addInstance: async () => {},
 })
 
-function DocumentViewerProvider({
-  children,
-  elementForViewer,
-  initialDoc,
-}: PropsWithChildren<TProps>): JSX.Element {
-  const [instances, setInstances] = useState<Array<WebViewerInstance>>([])
+function DocumentViewerProvider({ children }: TProviderProp): JSX.Element {
 
-  function addInstance(initialDoc, UID, DVElement) {
-    WebViewer(
+  const [instances, setInstances] = useState<Array<WebViewerInstance>>([])
+  const value = {instances, addInstance}
+
+  async function addInstance(
+    initialDoc: string,
+    UID: string,
+    DVElement: HTMLElement
+  ) {
+    const instance = await WebViewer(
       {
         path: 'webviewer/lib',
         initialDoc: initialDoc,
         enableFilePicker: true,
       },
       DVElement
-    ).then(instance => {
-      setInstance([...instances, instance])
-    })
+    )
+    // @ts-ignore:
+    if (!window['temp11']) window['temp11'] = []
+    // @ts-ignore:
+    window['temp11'].push(instance)
+    setInstances([...instances, instance])
   }
 
-  function removeInstance(UID) {}
+  function removeInstance(UID: string) {}
 
   return (
-    <DocumentViewerContext.Provider value={instances}>
+    <DocumentViewerContext.Provider value={value}>
       {children}
     </DocumentViewerContext.Provider>
   )
 }
+
+export { DocumentViewerContext, DocumentViewerProvider }
