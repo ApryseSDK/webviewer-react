@@ -26,7 +26,7 @@ import { DocumentViewerProvider }
   )
 ```
 
-Then inside your React components, you will be able to use the context hook to add new document instance
+Then inside your React components, you will be able to use the context hook to access existing / add new document instances
 
 ```
 import useInstances from '@pdftron/webviewer-react'
