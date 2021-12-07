@@ -3,39 +3,44 @@ import React, {
   useState,
   createContext,
   PropsWithChildren,
-  ReactNode
+  ReactNode,
 } from 'react'
 import WebViewer, { WebViewerInstance } from '@pdftron/webviewer'
 
 export type TProviderProp = {
-  libLocation: string,
+  libLocation: string
   children: ReactNode
 }
 
 export type TContextState = {
-  instance: undefined | WebViewerInstance,
-  setInstance: Function
+  instance: undefined | WebViewerInstance
+  setInstance(arg0: string, arg1: HTMLElement): Promise<void>
 }
 
 const DocumentViewerContext = createContext<TContextState>({
   instance: undefined,
-  setInstance: async () => { },
+  setInstance: async () => {},
 })
 
-function DocumentViewerProvider({ children, libLocation }: PropsWithChildren<TProviderProp>): JSX.Element {
-
-  const [instance, setInstanceState] = useState<WebViewerInstance|undefined>()
+function DocumentViewerProvider({
+  children,
+  libLocation,
+}: PropsWithChildren<TProviderProp>): JSX.Element {
+  const [instance, setInstanceState] = useState<WebViewerInstance | undefined>()
   const value = { instance, setInstance }
 
-  async function setInstance(
-    initialDoc: string,
-    htmlElement: HTMLElement
-  ) {
+  async function setInstance(initialDoc: string, htmlElement: HTMLElement) {
     const instance = await WebViewer(
       {
         path: libLocation,
         initialDoc: initialDoc,
-        disabledElements: ['header', 'toolsHeader', 'pageNavOverlay', 'textPopup', 'contextMenuPopup']
+        disabledElements: [
+          'header',
+          'toolsHeader',
+          'pageNavOverlay',
+          'textPopup',
+          'contextMenuPopup',
+        ],
       },
       htmlElement
     )
