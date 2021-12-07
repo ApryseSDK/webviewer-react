@@ -6,9 +6,9 @@
   "types": "src/index.d.ts",
   "scripts": {
     "build": "node ./esbuild.js && npm run ts-types",
-    "builddemo": "",
+    "deploydemo": "",
     "removewww": "rm -rf www",
-    "copypublic": "mkdir www && cp -r examples/assets/. www/assets/",
+    "copypublic": "mkdir www && cp -r examples/assets/. www/",
     "copybuild": "cp -r lib www/lib",
     "beforestart": "npm run removewww && npm run build && npm run copypublic && npm run copybuild && node copy-webviewer-file.js",
     "start": "npm run beforestart && esbuild --bundle examples/Context/index.js --loader:.js=jsx --outfile=www/main.js --servedir=www",
