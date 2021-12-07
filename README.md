@@ -15,10 +15,7 @@ npm i @pdftron/webviewer-react
 Then inside you app's root component (where you setup all other providers):
 ```
 import { DocumentViewerProvider }
-
 ...
-
-
   return (
     <DocumentViewerProvider>
       <ComponentChildren />
@@ -30,13 +27,9 @@ Then inside your React components, you will be able to use the context hook to a
 
 ```
 import useInstances from '@pdftron/webviewer-react'
-
 ...
-
 const { instances, addInstance } = useInstances()
-
 ...
-
 // Note that addInstance is asynchronous
 await addInstance(initialDoc, UID, HTMLElement)
 ```
@@ -45,9 +38,7 @@ Or simply import the <DocumentViewer /> component and place it at the places you
 
 ```
 import { DocumentViewer } from '@pdftron/webviewer-react'
-
 ...
-
   return (
       <ParentComponent>
         <DocumentViewer docUrl={docUrl1} UID={UID1}/>
