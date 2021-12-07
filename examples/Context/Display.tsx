@@ -52,7 +52,7 @@ function Display() {
     <>
       <div>
         <button onClick={createdNewDocumentViewer}>
-          Add New Document Viewer
+          Load New WebViewer Instance
         </button>
       </div>
       <div>
@@ -63,7 +63,7 @@ function Display() {
             borderTop: '2px solid',
           }}>
           <button onClick={LoadRandomDocument}>
-            Load Random Document With This Instance
+            Replace The Document With This Instance
           </button>
           <div style={{ height: '300px', width: '100%' }} ref={ref}/>
         </div>
