@@ -26,6 +26,7 @@ The above commands will automatically build the component and store the compiled
 ```
 npm i @pdftron/webviewer-react
 ```
+You will need to copy the library assets from './node_modules/@pdftron/webviewer/public' and place them to a location where you are able to serve them. Then provide the URL of the assets to the libLocation prop above. (Check our local demo to get a better understand for this setup.)
 Then inside you app's root component (where you setup all other providers):
 ```
 import { DocumentViewerProvider }
@@ -36,9 +37,8 @@ import { DocumentViewerProvider }
     </DocumentViewerProvider>
   )
 ```
-You will need to copy the library assets from './node_modules/@pdftron/webviewer/public' and place them to a location where you are able to serve them. Then provide the URL of the assets to the libLocation prop above. (Check our local demo to get a better understand for this setup.)
 
-Then inside your React components, you will be able to use the context hook to access existing / add new document instances. Each "instance" represents an element on the page where you want to display the document.
+Now you will be able to use the context hook to access existing / add new document instances in your React components. Each "instance" represents an element on the page where you want to display the document.
 
 ```
 import useInstances from '@pdftron/webviewer-react'
