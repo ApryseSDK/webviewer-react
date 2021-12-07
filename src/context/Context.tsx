@@ -13,28 +13,23 @@ export type TProviderProp = {
 }
 
 export type TContextState = {
-  instances: object,
-  addInstance: Function
-}
-
-export type TKeyInstancePair = {
-  [key: string]: WebViewerInstance
+  instance: undefined | WebViewerInstance,
+  setInstance: Function
 }
 
 const DocumentViewerContext = createContext<TContextState>({
-  instances: {},
-  addInstance: async () => { },
+  instance: undefined,
+  setInstance: async () => { },
 })
 
 function DocumentViewerProvider({ children, libLocation }: PropsWithChildren<TProviderProp>): JSX.Element {
 
-  const [instances, setInstances] = useState<TKeyInstancePair>({})
-  const value = { instances, addInstance }
+  const [instance, setInstanceState] = useState<WebViewerInstance|undefined>()
+  const value = { instance, setInstance }
 
-  async function addInstance(
+  async function setInstance(
     initialDoc: string,
-    UID: string,
-    DVElement: HTMLElement
+    htmlElement: HTMLElement
   ) {
     const instance = await WebViewer(
       {
@@ -42,9 +37,9 @@ function DocumentViewerProvider({ children, libLocation }: PropsWithChildren<TPr
         initialDoc: initialDoc,
         disabledElements: ['header', 'toolsHeader', 'pageNavOverlay', 'textPopup', 'contextMenuPopup']
       },
-      DVElement
+      htmlElement
     )
-    setInstances({ ...instances, [UID]: instance })
+    setInstanceState(instance)
   }
 
   return (

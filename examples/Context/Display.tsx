@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import useInstances from '../../lib'
+import React, { useState, useEffect, useRef, useReducer } from 'react'
+import useInstance from '../../lib'
 
 const docs = [
   'PDFTRON_about.pdf',
@@ -16,63 +16,57 @@ const docs = [
 ]
 
 function Display() {
+  const { instance, setInstance } = useInstance()
+  const [option, setOption] = useState(null)
+  const ref = useRef(null)
 
-  const { instances, addInstance } = useInstances()
-  const [elements, setElements] = useState([])
-
-  function appendNewDocumentViewer() {
+  function createdNewDocumentViewer() {
     const rnd = Math.floor(Math.random() * docs.length)
-    const UID = Date.now().toString(16)
-    const options = {
+    const opt = {
       // TODO: setup env for this
       initialDoc: `http://127.0.0.1:8000/files/${docs[rnd]}`,
-      UID: UID,
+      htmlElement: ref
     }
-    setElements([...elements, options])
+    setOption(opt)
   }
 
-  function LoadRandomDocument(key) {
+  function LoadRandomDocument() {
     const rnd = Math.floor(Math.random() * docs.length)
     // TODO: setup env for this
-    instances[key].UI.loadDocument(`http://127.0.0.1:8000/files/${docs[rnd]}`)
+    instance.UI.loadDocument(`http://127.0.0.1:8000/files/${docs[rnd]}`)
   }
 
   useEffect(() => {
-    if (elements.length > 0) {
-      ; (async () => {
-        const options = elements[elements.length - 1]
-        const el = document.getElementById(options.UID)
-        await addInstance(options.initialDoc, options.UID, el)
+    if (option && ref?.current) {
+      ;(async () => {
+        await setInstance()
       })()
     }
-  }, [elements])
+  }, [option])
 
   useEffect(() => {
-    console.log('List of instances - ', instances)
-  }, [instances])
+    console.log('WebViewer single instance - ', instance)
+  }, [instance])
 
   return (
     <>
       <div>
-        <button onClick={appendNewDocumentViewer}>
+        <button onClick={createdNewDocumentViewer}>
           Add New Document Viewer
         </button>
       </div>
       <div>
-        {elements.map(el => (
-          <div
-            key={el.UID}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              borderTop: '2px solid',
-            }}>
-            <button onClick={() => LoadRandomDocument(el.UID)}>
-              Load Random Document With This Instance
-            </button>
-            <div id={el.UID} style={{ height: '300px', width: '100%' }} />
-          </div>
-        ))}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            borderTop: '2px solid',
+          }}>
+          <button onClick={LoadRandomDocument}>
+            Load Random Document With This Instance
+          </button>
+          <div style={{ height: '300px', width: '100%' }} ref={ref}/>
+        </div>
       </div>
     </>
   )

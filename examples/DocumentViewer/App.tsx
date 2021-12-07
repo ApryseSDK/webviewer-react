@@ -1,6 +1,5 @@
 import React from 'react'
-import { DocumentViewer } from '../../lib'
-import { DocumentViewerProvider } from '../../lib'
+import { DocumentViewer, DocumentViewerProvider } from '../../lib'
 import '../_css/App.css'
 
 const App = () => {
@@ -12,7 +11,7 @@ const App = () => {
     <DocumentViewerProvider libLocation={'http://127.0.0.1:8000/webviewer/lib'}>
       <div className='App'>
         <div className='header'>React sample</div>
-        <DocumentViewer docUrl={docUrl} UID={UID} />
+        <DocumentViewer docUrl={docUrl} />
       </div>
     </DocumentViewerProvider>
   )

@@ -1,19 +1,18 @@
 // @ts-ignore
 import React, { useRef, useEffect } from 'react'
-import useInstances from '../context'
+import useInstance from '../context'
 
 export type TProps = {
   docUrl: string
-  UID: string
 }
 
-function DocumentViewer({ docUrl, UID }: TProps): JSX.Element {
+function DocumentViewer({ docUrl }: TProps): JSX.Element {
   const viewer = useRef<HTMLDivElement>(null)
 
-  const { addInstance } = useInstances()
+  const { setInstance } = useInstance()
 
   useEffect(() => {
-    addInstance(docUrl, UID, viewer.current)
+    setInstance(docUrl, viewer.current)
   }, [])
 
   return <div className='webviewer' ref={viewer} />
