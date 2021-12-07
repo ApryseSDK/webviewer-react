@@ -1,21 +1,24 @@
 // @ts-ignore
-import React, { useRef, useEffect } from 'react'
+import React, { useEffect, LegacyRef } from 'react'
 import useInstance from '../context'
 
 export type TProps = {
-  docUrl: string
+  instance: string
 }
 
-function DocumentViewer({ docUrl }: TProps): JSX.Element {
-  const viewer = useRef<HTMLDivElement>(null)
+const DocumentViewer = React.forwardRef((props: object, ref: LegacyRef<HTMLDivElement>) => {
 
-  const { setInstance } = useInstance()
+  const { instance } = useInstance()
 
-  useEffect(() => {
-    setInstance(docUrl, viewer.current)
-  }, [])
+  console.log(props,instance)
 
-  return <div className='webviewer' ref={viewer} />
-}
+
+  /**
+   * instace.option = props.option
+   * 
+   */
+
+  return <div className='webviewer' ref={ref} />
+})
 
 export default DocumentViewer

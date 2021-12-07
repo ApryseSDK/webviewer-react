@@ -1,51 +1,30 @@
 // @ts-ignore
 import React, {
-  useState,
   createContext,
   PropsWithChildren,
   ReactNode,
 } from 'react'
-import WebViewer, { WebViewerInstance } from '@pdftron/webviewer'
+import type { WebViewerInstance } from '@pdftron/webviewer'
 
 export type TProviderProp = {
-  libLocation: string
+  webViewerInstance: WebViewerInstance
   children: ReactNode
 }
 
 export type TContextState = {
   instance: undefined | WebViewerInstance
-  setInstance(arg0: string, arg1: HTMLElement): Promise<void>
 }
 
 const DocumentViewerContext = createContext<TContextState>({
   instance: undefined,
-  setInstance: async () => {},
 })
 
 function DocumentViewerProvider({
   children,
-  libLocation,
+  webViewerInstance,
 }: PropsWithChildren<TProviderProp>): JSX.Element {
-  const [instance, setInstanceState] = useState<WebViewerInstance | undefined>()
-  const value = { instance, setInstance }
 
-  async function setInstance(initialDoc: string, htmlElement: HTMLElement) {
-    const instance = await WebViewer(
-      {
-        path: libLocation,
-        initialDoc: initialDoc,
-        disabledElements: [
-          'header',
-          'toolsHeader',
-          'pageNavOverlay',
-          'textPopup',
-          'contextMenuPopup',
-        ],
-      },
-      htmlElement
-    )
-    setInstanceState(instance)
-  }
+  const value = { instance: webViewerInstance }
 
   return (
     <DocumentViewerContext.Provider value={value}>
