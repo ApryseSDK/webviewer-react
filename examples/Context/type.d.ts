@@ -4,9 +4,3 @@ interface I {
   description: string
   status: boolean
 }
-
-type ContextType = {
-  todos: ITodo[]
-  saveTodo: (todo: ITodo) => void
-  updateTodo: (id: number) => void
-}

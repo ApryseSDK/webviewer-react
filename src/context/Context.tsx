@@ -1,12 +1,15 @@
 // @ts-ignore
 import React, {
   useState,
-  createContext
+  createContext,
+  PropsWithChildren,
+  ReactNode
 } from 'react'
 import WebViewer, { WebViewerInstance } from '@pdftron/webviewer'
 
 export type TProviderProp = {
-  children: JSX.Element
+  libLocation: string,
+  children: ReactNode
 }
 
 export type TContextState = {
@@ -23,7 +26,7 @@ const DocumentViewerContext = createContext<TContextState>({
   addInstance: async () => { },
 })
 
-function DocumentViewerProvider({ children }: TProviderProp): JSX.Element {
+function DocumentViewerProvider({ children, libLocation }: PropsWithChildren<TProviderProp>): JSX.Element {
 
   const [instances, setInstances] = useState<TKeyInstancePair>({})
   const value = { instances, addInstance }
@@ -35,7 +38,7 @@ function DocumentViewerProvider({ children }: TProviderProp): JSX.Element {
   ) {
     const instance = await WebViewer(
       {
-        path: 'webviewer/lib',
+        path: libLocation,
         initialDoc: initialDoc,
         disabledElements: ['header', 'toolsHeader', 'pageNavOverlay', 'textPopup', 'contextMenuPopup']
       },

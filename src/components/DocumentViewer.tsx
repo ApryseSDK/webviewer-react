@@ -1,4 +1,5 @@
-import { useRef, useEffect } from 'react'
+// @ts-ignore
+import React, { useRef, useEffect } from 'react'
 import useInstances from '../context'
 
 export type TProps = {

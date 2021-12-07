@@ -9,7 +9,7 @@ const App = () => {
   const UID = Date.now().toString(16)
 
   return (
-    <DocumentViewerProvider>
+    <DocumentViewerProvider libLocation={'http://127.0.0.1:8000/webviewer/lib'}>
       <div className='App'>
         <div className='header'>React sample</div>
         <DocumentViewer docUrl={docUrl} UID={UID} />

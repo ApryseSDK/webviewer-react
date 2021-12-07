@@ -6,6 +6,20 @@ A React component for displaying documents in your React app. It is developed wi
 
 Codesandbox link to be updated 
 
+## Run the demo locally
+
+To run the demo with context hooks
+```
+npm run startctx
+```
+
+To run the demo with `<DocumentViewer />` component:
+```
+npm run startdv
+```
+
+The above commands will automatically build the component and store the compiled module inside `lib/` folder, from where the example app will make imports for components / context hooks. After running the command you will be able to see the app running on `http://127.0.0.1:8000`. 
+
 ## To use this library in your own project
 (package to be published to registry)
 
@@ -17,13 +31,14 @@ Then inside you app's root component (where you setup all other providers):
 import { DocumentViewerProvider }
 ...
   return (
-    <DocumentViewerProvider>
+    <DocumentViewerProvider libLocation={url}>
       <ComponentChildren />
     </DocumentViewerProvider>
   )
 ```
+You will need to copy the library assets from './node_modules/@pdftron/webviewer/public' and place them to a location where you are able to serve them. Then provide the URL of the assets to the libLocation prop above. (Check our local demo to get a better understand for this setup.)
 
-Then inside your React components, you will be able to use the context hook to access existing / add new document instances
+Then inside your React components, you will be able to use the context hook to access existing / add new document instances. Each "instance" represents an element on the page where you want to display the document.
 
 ```
 import useInstances from '@pdftron/webviewer-react'
@@ -58,20 +73,6 @@ cd webviewer-react
 npm install
 npm run preparevwlib
 ```
-
-## Run the demo
-
-To run the demo with context hooks
-```
-npm run startctx
-```
-
-To run the demo with `<DocumentViewer />` component:
-```
-npm run startdv
-```
-
-The above commands will automatically build the component and store the compiled module inside `lib/` folder, from where the example app will make imports for components / context hooks. After running the command you will be able to see the app running on `http://127.0.0.1:8000`. 
 
 ## Build
 
