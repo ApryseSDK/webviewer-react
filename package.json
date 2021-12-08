@@ -6,7 +6,7 @@
   "types": "src/index.d.ts",
   "scripts": {
     "build": "node ./esbuild.js && npm run ts-types",
-    "deploydemo": "",
+    "deploydemo": "npm run beforestart && esbuild --bundle examples/Context/index.js --loader:.js=jsx --outfile=www/main.js && firebase deploy --only hosting:pdftron-ychen02",
     "removewww": "rm -rf www",
     "copypublic": "mkdir www && cp -r examples/assets/. www/",
     "copybuild": "cp -r lib www/lib",
