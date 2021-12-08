@@ -10,7 +10,6 @@ const App = () => {
   return (
     <DocumentViewerProvider>
       <div className='App'>
-        <div className='header'>React sample</div>
         <Body />
       </div>
     </DocumentViewerProvider>
