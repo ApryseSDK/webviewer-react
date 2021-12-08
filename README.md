@@ -16,7 +16,7 @@ npm i && npm run installpeer
 npm run start
 ```
 
-The above commands will install all dependencies, build the component and store the compiled module inside `www/lib/` folder, from where the example app will make imports for components / context hooks. After running the command you will be able to see the app running on `http://127.0.0.1:8000`. 
+The above commands will install all dependencies, build the component and store the compiled module inside `www/lib/` folder, from where the example app will make imports for components / context hooks. After running the command you will be able to see the app live at `http://127.0.0.1:8000`. 
 
 ## To use this library in your own React project
 (package to be published to registry)
@@ -46,7 +46,7 @@ import { DocumentViewer } from '@pdftron/webviewer-react'
   const { setInstance } = useInstance()
   const ref = useRef(null)
   useEffect(() => {
-      WebViewer(
+      ref?.current && WebViewer(
         {
           path: 'http://127.0.0.1:8000/webviewer/lib',
           initialDoc: getRandomLocalDocUrl()
