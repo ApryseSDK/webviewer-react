@@ -1,5 +1,7 @@
-import React, { useState, useEffect, useRef, useReducer } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import useInstance from '../../lib'
+import WebViewer from '@pdftron/webviewer'
+import { DocumentViewer } from '../../lib'
 
 const docs = [
   'PDFTRON_about.pdf',
@@ -15,34 +17,46 @@ const docs = [
   '7.png',
 ]
 
+function getRandomLocalDocUrl() {
+  const rnd = Math.floor(Math.random() * docs.length)
+  // TODO: setup env
+  return `http://127.0.0.1:8000/files/${docs[rnd]}`
+}
+
 function Display() {
   const { instance, setInstance } = useInstance()
-  const [option, setOption] = useState(null)
+  const [key, setKey] = useState(Date.now().toString(16))
   const ref = useRef(null)
+  const libLocation = 'http://127.0.0.1:8000/webviewer/lib'
 
-  function createdNewDocumentViewer() {
-    const rnd = Math.floor(Math.random() * docs.length)
-    const opt = {
-      // TODO: setup env for this
-      initialDoc: `http://127.0.0.1:8000/files/${docs[rnd]}`,
-      htmlElement: ref
-    }
-    setOption(opt)
+  function reloadDocument() {
+    instance?.UI.loadDocument(getRandomLocalDocUrl())
   }
 
-  function LoadRandomDocument() {
-    const rnd = Math.floor(Math.random() * docs.length)
-    // TODO: setup env for this
-    instance.UI.loadDocument(`http://127.0.0.1:8000/files/${docs[rnd]}`)
+  function reloadWebViewer() {
+    setKey(Date.now().toString(16))
   }
 
   useEffect(() => {
-    if (option && ref?.current) {
-      ;(async () => {
-        await setInstance()
-      })()
+    if (ref?.current) {
+      WebViewer(
+        {
+          path: libLocation,
+          initialDoc: getRandomLocalDocUrl(),
+          disabledElements: [
+            'header',
+            'toolsHeader',
+            'pageNavOverlay',
+            'textPopup',
+            'contextMenuPopup',
+          ],
+        },
+        ref.current
+      ).then(instance => {
+        setInstance(instance)
+      })
     }
-  }, [option])
+  }, [ref, key])
 
   useEffect(() => {
     console.log('WebViewer single instance - ', instance)
@@ -51,22 +65,18 @@ function Display() {
   return (
     <>
       <div>
-        <button onClick={createdNewDocumentViewer}>
-          Load New WebViewer Instance
-        </button>
+        <button onClick={reloadWebViewer}>Reload the DocumentViewer Component and WebViewer Instance</button>
       </div>
-      <div>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            borderTop: '2px solid',
-          }}>
-          <button onClick={LoadRandomDocument}>
-            Replace The Document With This Instance
-          </button>
-          <div style={{ height: '300px', width: '100%' }} ref={ref}/>
-        </div>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          borderTop: '2px solid',
+        }}>
+        <button onClick={reloadDocument}>
+          Replace The Document With The Current Instance
+        </button>
+        <DocumentViewer ref={ref} key={key} />
       </div>
     </>
   )
