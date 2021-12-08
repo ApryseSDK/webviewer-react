@@ -1,5 +1,5 @@
-import React from 'react'
-import useInstance from '../context'
+import React from 'react';
+import useInstance from '../context';
 
 const disabledElements = [
   'header',
@@ -11,7 +11,7 @@ const disabledElements = [
   'menuButton',
   'textPopup',
   'contextMenuPopup',
-]
+];
 
 export type TProps = {
   zoom: number
@@ -20,11 +20,14 @@ export type TProps = {
 
 const DocumentViewer = React.forwardRef<HTMLDivElement, TProps>((props, ref) => {
 
-  const { instance } = useInstance()
+  const { instance } = useInstance();
+  const docViewer = instance?.Core.documentViewer;
 
   if (instance) {
-    instance.UI.disableElements(disabledElements)
-    instance.UI.setZoomLevel(props.zoom)
+    instance.UI.disableElements(disabledElements);
+    docViewer?.addEventListener('documentLoaded', function() {
+      instance.UI.setZoomLevel(props.zoom);
+    });
   }
 
   return <div className='webviewer' ref={ref} />
