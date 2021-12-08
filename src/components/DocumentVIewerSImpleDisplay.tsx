@@ -1,34 +1,20 @@
-import DocumentViewer from './DocumentViewer'
-import type { WebViewerOptions } from '@pdftron/webviewer'
+// @ts-ignore
+import React, { useEffect } from 'react'
 import useInstance from '../context'
-import { useEffect } from 'react'
+import DocumentViewer from './DocumentViewer'
+import { DISABLED_ELEMENTS } from '../utils'
+import type {TProps, TRef} from './DocumentViewer'
 
-export type TProps = {
-  className?: string
-} & WebViewerOptions
-
-const disabledElements = [
-  'header',
-  'toolsHeader',
-  'viewControlsButton',
-  'leftPanelButton',
-  'pageNavOverlay',
-  'searchButton',
-  'menuButton',
-  'textPopup',
-  'contextMenuPopup',
-]
-
-function DocumentViewerSimpleDisplay(props: TProps) {
+const DocumentViewerSimpleDisplay = React.forwardRef<TRef, TProps>((props, ref) => {
   const { instance } = useInstance()
 
   useEffect(() => {
     if (instance) {
-      instance.UI.disableElements(disabledElements)
+      instance.UI.disableElements(DISABLED_ELEMENTS)
     }
   }, [instance])
 
-  return <DocumentViewer {...props} />
-}
+  return <DocumentViewer {...props} ref={ref}/>
+})
 
 export default DocumentViewerSimpleDisplay
