@@ -12,7 +12,8 @@
     "copybuild": "cp -r lib www/lib",
     "beforestart": "npm run removewww && npm run build && npm run copypublic && npm run copybuild && node copy-webviewer-file.js",
     "start": "npm run beforestart && esbuild --bundle examples/Context/index.js --loader:.js=jsx --outfile=www/main.js --servedir=www",
-    "ts-types": " tsc -d --emitDeclarationOnly --outDir lib/context"
+    "ts-types": " tsc -d --emitDeclarationOnly --outDir lib/context",
+    "installpeer": "npm i react react-dom @types/react @types/react-dom @pdftron/webviewer"
   },
   "repository": {
     "type": "git",
@@ -25,15 +26,17 @@
     "url": "https://github.com/PDFTron/webviewer-react/issues"
   },
   "homepage": "https://github.com/PDFTron/webviewer-react#readme",
-  "dependencies": {
-    "@pdftron/webviewer": "^8.2.0",
-    "@types/react": "^17.0.37",
-    "@types/react-dom": "^17.0.11",
+  "devDependencies": {
     "esbuild": "^0.14.1",
     "fs-extra": "^10.0.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
     "typescript": "^4.5.2"
+  },
+  "peerDependencies": {
+    "@pdftron/webviewer": "^8.2.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0"
   },
   "browserslist": {
     "production": [
