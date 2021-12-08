@@ -9,34 +9,30 @@ import React, {
 import type { WebViewerInstance } from '@pdftron/webviewer'
 
 export type TProviderProp = {
-  children: ReactNode
+  children: ReactNode,
+  instance?: WebViewerInstance
 }
 
 export type TContextState = {
-  instance: null | WebViewerInstance
+  instance: WebViewerInstance | undefined
   setInstance(arg: WebViewerInstance): void
 }
 
 const DocumentViewerContext = createContext<TContextState>({
-  instance: null,
+  instance: undefined,
   setInstance: ()=>{}
 })
 
 function DocumentViewerProvider({
-  children
+  children, instance
 }: PropsWithChildren<TProviderProp>): JSX.Element { 
 
-  const [instanceState, setInstanceState] = useState<WebViewerInstance | null>(null)
-  const value = { instance: instanceState, setInstance }
+  const [instanceState, setInstance] = useState<WebViewerInstance | undefined>(instance)
 
-  function setInstance(instance: WebViewerInstance | null) {
-    setInstanceState(instance)
-  }
-
-  const memoizedValue = useMemo(()=>{return value},[instanceState, setInstance])
+  const value = useMemo(()=>({ instance: instanceState, setInstance }),[instanceState, setInstance])
 
   return (
-    <DocumentViewerContext.Provider value={memoizedValue}>
+    <DocumentViewerContext.Provider value={value}>
       {children}
     </DocumentViewerContext.Provider>
   )
