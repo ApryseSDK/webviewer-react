@@ -1,36 +1,31 @@
-import React from 'react';
-import useInstance from '../context';
-
-const disabledElements = [
-  'header',
-  'toolsHeader',
-  'viewControlsButton',
-  'leftPanelButton',
-  'pageNavOverlay',
-  'searchButton',
-  'menuButton',
-  'textPopup',
-  'contextMenuPopup',
-];
+import React, { useEffect, useRef } from 'react'
+import useInstance from '../context'
+import WebViewer from '@pdftron/webviewer'
+import type { WebViewerOptions } from '@pdftron/webviewer'
 
 export type TProps = {
-  zoom: number
-  // will add more initial configs
-}
+  className?: string
+} & WebViewerOptions
 
-const DocumentViewer = React.forwardRef<HTMLDivElement, TProps>((props, ref) => {
+export type TRef = React.RefObject<HTMLDivElement>
 
-  const { instance } = useInstance();
-  const docViewer = instance?.Core.documentViewer;
+const DocumentViewer = React.forwardRef<TRef, TProps>(
+  ({ className, ...rest }, ref) => {
+    const selfRef =
+      (ref as React.RefObject<HTMLDivElement>) || useRef<HTMLDivElement>(null)
 
-  if (instance) {
-    instance.UI.disableElements(disabledElements);
-    docViewer?.addEventListener('documentLoaded', function() {
-      instance.UI.setZoomLevel(props.zoom);
-    });
+    const { instance, setInstance } = useInstance()
+
+    useEffect(() => {
+      if (!instance) {
+        WebViewer(rest, selfRef.current as HTMLDivElement).then(ins => {
+          setInstance(ins)
+        })
+      }
+    }, [])
+
+    return <div className={className} ref={selfRef} />
   }
-
-  return <div className='webviewer' ref={ref} />
-})
+)
 
 export default DocumentViewer
