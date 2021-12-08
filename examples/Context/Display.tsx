@@ -122,6 +122,7 @@ function Modal ({modalRef, toggleModal}) {
         left: '50%',
         transform: 'translate(-50%, -50%)',
         width: 'auto',
+        minWidth:'540px',
         height: '400px',
         boxShadow: '0 0 10px;',
         backgroundColor: '#FFFFFFF0',
