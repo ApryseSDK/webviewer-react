@@ -4,9 +4,7 @@ A React component for displaying document in your React app. It is developed wit
 Want to handle the document inside you cool modal component? No problem.
 
 ## Live Demo
-
-Firebase App
-
+[Demo](https://pdftron-ychen02.web.app/) 
 ## Run the demo locally
 
 To run the demo with `<DocumentViewer />` component:
