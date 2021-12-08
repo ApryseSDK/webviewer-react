@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import useInstance from '../../lib'
-import WebViewer from '@pdftron/webviewer'
-import { DocumentViewer } from '../../lib'
+import { DocumentViewerSimpleDisplay } from '../../lib'
 
 const docs = [
   'PDFTRON_about.pdf',
@@ -16,11 +15,13 @@ const docs = [
   '6.png',
   '7.png',
 ]
+//https://pdftron-ychen02.web.app
 const libLocation = 'http://127.0.0.1:8000/webviewer/lib'
 
 function getRandomLocalDocUrl() {
   const rnd = Math.floor(Math.random() * docs.length)
   // TODO: setup env
+  
   return `http://127.0.0.1:8000/files/${docs[rnd]}`
 }
 
@@ -29,33 +30,16 @@ function getRandomInt(max) {
 }
 
 function Display() {
-  const { instance, setInstance } = useInstance()
+  const { instance } = useInstance()
   const [open, setOpen] = useState(false)
-  const [key, setKey] = useState(Date.now().toString(16))
   const ref = useRef(null)
   const modalRef = useRef(null)
-
-  function reloadWebViewer() {
-    setKey(Date.now().toString(16))
-  }
 
   function toggleModal() {
     setOpen(!open)
   }
 
-  useEffect(() => {
-    if (ref?.current) {
-      WebViewer(
-        {
-          path: libLocation,
-          initialDoc: getRandomLocalDocUrl(),
-        },
-        ref.current
-      ).then(ins => {
-        setInstance(ins)
-      })
-    }
-  }, [ref, key])
+  const initialOptions = {initialDoc: getRandomLocalDocUrl(), path: libLocation}
 
   useEffect(() => {
     console.log('WebViewer single instance - ', instance)
@@ -64,15 +48,12 @@ function Display() {
   return (
     <>
       <div style={{ marginBottom: '10px' }}>
-        <button onClick={reloadWebViewer} className='buttons'>
-          Reload Component
-        </button>
         <button onClick={toggleModal} className='buttons'>
           Toggle Modal
         </button>
       </div>
-      {open &&　<Modal modalRef={modalRef} toggleModal={toggleModal}/>}
-      <DocumentViewer ref={ref} zoom={0.4} key={key} />
+      {open && <Modal modalRef={modalRef} toggleModal={toggleModal}/>}
+      <DocumentViewerSimpleDisplay ref={ref} {...initialOptions}/>
     </>
   )
 }
@@ -124,7 +105,7 @@ function Modal ({modalRef, toggleModal}) {
         width: 'auto',
         minWidth:'540px',
         height: '400px',
-        boxShadow: '0 0 10px;',
+        boxShadow: '0 0 10px',
         backgroundColor: '#FFFFFFF0',
       }}>
         <div className='hover' style={{position: 'absolute', top:'10px', right:'10px', fontSize:'24px'}} onClick={toggleModal}>X</div>

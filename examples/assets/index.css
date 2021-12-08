@@ -16,7 +16,7 @@ body
   cursor: pointer; 
 }
 
-.webviewer iframe {
+iframe {
   width: 100vw;
   height: 70vh;
 }
