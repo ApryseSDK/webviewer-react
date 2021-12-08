@@ -16,6 +16,7 @@ const docs = [
   '6.png',
   '7.png',
 ]
+const libLocation = 'http://127.0.0.1:8000/webviewer/lib'
 
 function getRandomLocalDocUrl() {
   const rnd = Math.floor(Math.random() * docs.length)
@@ -27,7 +28,6 @@ function Display() {
   const { instance, setInstance } = useInstance()
   const [key, setKey] = useState(Date.now().toString(16))
   const ref = useRef(null)
-  const libLocation = 'http://127.0.0.1:8000/webviewer/lib'
 
   function reloadDocument() {
     instance?.UI.loadDocument(getRandomLocalDocUrl())
@@ -42,14 +42,7 @@ function Display() {
       WebViewer(
         {
           path: libLocation,
-          initialDoc: getRandomLocalDocUrl(),
-          disabledElements: [
-            'header',
-            'toolsHeader',
-            'pageNavOverlay',
-            'textPopup',
-            'contextMenuPopup',
-          ],
+          initialDoc: getRandomLocalDocUrl()
         },
         ref.current
       ).then(instance => {
@@ -74,7 +67,7 @@ function Display() {
           borderTop: '2px solid',
         }}>
         <button onClick={reloadDocument}>
-          Replace The Document With The Current Instance
+          Replace The Document Using The Current Instance
         </button>
         <DocumentViewer ref={ref} key={key} />
       </div>
