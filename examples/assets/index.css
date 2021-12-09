@@ -30,7 +30,7 @@ iframe {
   transition: ease-in-out 0.2s;
   color: #007bff;
   background-color: white;
-  max-width: 230px;
+  min-width: 165px;
   margin-right: 5px;
   font-family: -webkit-pictograph;
   font-weight: 600;
