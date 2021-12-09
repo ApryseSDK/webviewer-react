@@ -36,49 +36,34 @@ import { DocumentViewerProvider }
     </DocumentViewerProvider>
   )
 ```
-
-**IMPORTANT:** You will need to copy the library assets from './node_modules/@pdftron/webviewer/public' and place them at a location where you are able to serve them. Then provide the URL of these assets to the `path` option at the place where you initialize WebViewer instance. After that, simply create a ref and pass that into both WebViewer's initializer and the `<DocumentViewer/>` component.
-
+You can optionally supply a WebViewer instance into the DocumentViewerProvider if this is what you need.
+```
+<DocumentViewerProvider instance={yourWebViewerInstance}> 
+```
+**IMPORTANT:** You will need to copy the library assets from './node_modules/@pdftron/webviewer/public' and place them at a location where you are able to serve them. Then provide the URL of these assets to the `path` option at the place where you use `DocumentViewer` or `DocumentViewerSimpleDisplay` components.
 For example:
-
 ```
 // YourComponent.tsx
 import WebViewer from '@pdftron/webviewer'
 import { DocumentViewer } from '@pdftron/webviewer-react'
 ...
-  const { setInstance } = useInstance()
-  const ref = useRef(null)
-  useEffect(() => {
-      ref?.current && WebViewer(
-        {
-          path: 'http://127.0.0.1:8000/webviewer/lib',
-          initialDoc: getRandomLocalDocUrl()
-        },
-        ref.current
-      ).then(instance => {
-        setInstance(instance)
-      })
-  }, [ref])
-
+  const options = {path: 'https://url-to/your/lib-location', /*optional*/ initialDoc: 'https://url-to/your/document' }
   return (
     <div id='someComponent'>
       <p>Display the document below</p>
-      <DocumentViewer ref={ref}/>
+      <DocumentViewer {...options}/>
     </div>
   )
 ```
-
+You can optionally pass a `ref` into `DocumentViewer` if you wish to have access to the DOM element on which WebViewer was instantiated.
 You will now be able to access the WebViewer instance at other places of your React app!
-
 ```
 OtherComonent.tsx
 import useInstances from '@pdftron/webviewer-react'
 ...
 const { instance } = useInstance()
 ```
-
-For example if you want to create an annotation, just grab the annotationManager from the WebViewer instance, create an annotation object and add it to your document:
-
+If you want to create an annotation, just grab the annotationManager from the WebViewer instance, create an annotation object and add it to your document:
 ```
 const manager = instance.Core.annotationManager
 const rectangleAnnot = new instance.Core.Annotations.RectangleAnnotation()
