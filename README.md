@@ -7,8 +7,6 @@ Want to handle the document inside you cool modal component? No problem.
 [Demo](https://pdftron-ychen02.web.app/) 
 ## Run the demo locally
 
-To run the demo with `<DocumentViewer />` component:
-
 ```
 git clone https://github.com/PDFTron/webviewer-react.git
 npm i && npm run installpeer
@@ -28,6 +26,7 @@ npm i @pdftron/webviewer @pdftron/webviewer-react
 Inside you app's root component (where you setup all other providers):
 
 ```
+// App.tsx
 import { DocumentViewerProvider }
 ...
   return (
@@ -56,9 +55,10 @@ import { DocumentViewer } from '@pdftron/webviewer-react'
   )
 ```
 You can optionally pass a `ref` into `DocumentViewer` if you wish to have access to the DOM element on which WebViewer was instantiated.
+
 You will now be able to access the WebViewer instance at other places of your React app!
 ```
-OtherComonent.tsx
+// OtherComonent.tsx
 import useInstances from '@pdftron/webviewer-react'
 ...
 const { instance } = useInstance()
