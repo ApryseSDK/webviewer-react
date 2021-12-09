@@ -1,45 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react'
 import useInstance from '../../lib'
 import { DocumentViewerSimpleDisplay } from '../../lib'
+import { getRandomLocalDocUrl, getInitialWvOptions, getRandomInt } from './utils'
 
-const docs = [
-  'PDFTRON_about.pdf',
-  '1.pdf',
-  '2.pdf',
-  '3.pdf',
-  '1.png',
-  '2.png',
-  '3.png',
-  '4.png',
-  '5.png',
-  '6.png',
-  '7.png',
-]
-//https://pdftron-ychen02.web.app
-const libLocation = 'http://127.0.0.1:8000/webviewer/lib'
-
-function getRandomLocalDocUrl() {
-  const rnd = Math.floor(Math.random() * docs.length)
-  // TODO: setup env
-  
-  return `http://127.0.0.1:8000/files/${docs[rnd]}`
-}
-
-function getRandomInt(max) {
-  return Math.floor(Math.random() * max)
-}
 
 function Display() {
   const { instance } = useInstance()
   const [open, setOpen] = useState(false)
   const ref = useRef(null)
-  const modalRef = useRef(null)
 
   function toggleModal() {
     setOpen(!open)
   }
-
-  const initialOptions = {initialDoc: getRandomLocalDocUrl(), path: libLocation}
 
   useEffect(() => {
     console.log('WebViewer single instance - ', instance)
@@ -52,13 +24,13 @@ function Display() {
           Toggle Modal
         </button>
       </div>
-      {open && <Modal modalRef={modalRef} toggleModal={toggleModal}/>}
-      <DocumentViewerSimpleDisplay ref={ref} {...initialOptions}/>
+      {open && <Modal toggleModal={toggleModal}/>}
+      <DocumentViewerSimpleDisplay ref={ref} {...getInitialWvOptions()}/>
     </>
   )
 }
 
-function Modal ({modalRef, toggleModal}) {
+function Modal ({toggleModal}) {
   const { instance } = useInstance()
 
   function zoomIn() {
@@ -95,7 +67,6 @@ function Modal ({modalRef, toggleModal}) {
 
   return (
     <div
-      ref={modalRef}
       style={{
         display: 'flex',
         position: 'absolute',
