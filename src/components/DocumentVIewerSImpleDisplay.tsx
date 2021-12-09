@@ -1,20 +1,11 @@
 // @ts-ignore
-import React, { useEffect } from 'react'
-import useInstance from '../context'
+import React from 'react'
 import DocumentViewer from './DocumentViewer'
 import { DISABLED_ELEMENTS } from '../utils'
-import type {TProps, TRef} from './DocumentViewer'
+import type { TProps, TRef } from './DocumentViewer'
 
 const DocumentViewerSimpleDisplay = React.forwardRef<TRef, TProps>((props, ref) => {
-  const { instance } = useInstance()
-
-  useEffect(() => {
-    if (instance) {
-      instance.UI.disableElements(DISABLED_ELEMENTS)
-    }
-  }, [instance])
-
-  return <DocumentViewer {...props} ref={ref}/>
+  return <DocumentViewer disabledElements={DISABLED_ELEMENTS} {...props} ref={ref} />
 })
 
 export default DocumentViewerSimpleDisplay
