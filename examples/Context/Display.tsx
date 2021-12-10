@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import useInstance, {
   DocumentViewer,
   DocumentViewerSimpleDisplay,
-} from '../../lib'
+} from '../../src'
 import { getInitialWvOptions } from './utils'
 import Modal from "./Chakra/Modal";
 import Drawer from "./Chakra/Drawer";

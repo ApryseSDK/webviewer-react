@@ -1,5 +1,5 @@
 import * as React from "react";
-import useInstance from "../../../lib";
+import useInstance from "../../../src";
 import { getRandomLocalDocUrl, buildRandomRectAnnot } from "../utils.js";
 import {
     Stack,

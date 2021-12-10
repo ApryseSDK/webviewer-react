@@ -1,12 +1,8 @@
 import React from 'react'
-import useInstance from '../../lib'
+import useInstance from '../../src'
 import {
   getRandomLocalDocUrl,
-  buildRandomRectAnnot,
-  modalStyle,
-  closeStyle,
-  modalWrapper,
-  rowStyle,
+  buildRandomRectAnnot
 } from './utils'
 
 export default function Modal({ toggleModal }) {

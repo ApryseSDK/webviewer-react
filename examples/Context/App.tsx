@@ -1,5 +1,5 @@
 import React from 'react'
-import { DocumentViewerProvider } from '../../lib'
+import { DocumentViewerProvider } from '../../src'
 import { ChakraProvider } from "@chakra-ui/react";
 import Body from './Body'
 import '../_css/App.css'

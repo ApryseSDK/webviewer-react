@@ -1,6 +1,6 @@
 // reference: https://www.pdftron.com/documentation/web/guides/advance-text-search/
 import * as React from "react";
-import useInstance from "../../../lib";
+import useInstance from "../../../src";
 import {
     Button,
     Drawer,
