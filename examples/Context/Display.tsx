@@ -4,7 +4,8 @@ import useInstance, {
   DocumentViewerSimpleDisplay,
 } from '../../lib'
 import { getInitialWvOptions } from './utils'
-import Modal from './Modal'
+import Modal from "./Chakra/Modal";
+import Drawer from "./Chakra/Drawer";
 
 function Display() {
   const { instance, setInstance } = useInstance()
@@ -17,13 +18,17 @@ function Display() {
   }
 
   function simpleDisplay() {
-    setInstance(undefined)
-    setSFullUi(false)
+    if (fullUi) {
+      setInstance(undefined);
+      setSFullUi(false);
+    }
   }
 
   function showFullUi() {
-    setInstance(undefined)
-    setSFullUi(true)
+    if (!fullUi) {
+      setInstance(undefined);
+      setSFullUi(true);
+    }
   }
 
   useEffect(() => {
@@ -32,22 +37,20 @@ function Display() {
 
   return (
     <>
-      <div style={{ marginBottom: '10px' }}>
-        <button onClick={simpleDisplay} className='buttons'>
+      <div style={{ marginBottom: "10px" }}>
+        <button onClick={simpleDisplay} className="buttons">
           Simple Display
         </button>
-        <button onClick={showFullUi} className='buttons'>
+        <button onClick={showFullUi} className="buttons">
           Full UI
         </button>
-        <button onClick={toggleModal} className='buttons'>
-          Controls Inside Modal
-        </button>
       </div>
-      {open && <Modal toggleModal={toggleModal} />}
+      <Modal />
+      <Drawer />
       {fullUi ? (
-        <DocumentViewer ref={ref} {...getInitialWvOptions()} />
+        <DocumentViewer {...getInitialWvOptions()} />
       ) : (
-        <DocumentViewerSimpleDisplay ref={ref} {...getInitialWvOptions()} />
+        <DocumentViewerSimpleDisplay {...getInitialWvOptions()} />
       )}
     </>
   )
