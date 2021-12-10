@@ -27,7 +27,11 @@
   },
   "homepage": "https://github.com/PDFTron/webviewer-react#readme",
   "devDependencies": {
+    "@chakra-ui/react": "^1.7.3",
+    "@emotion/react": "^11.7.0",
+    "@emotion/styled": "^11.6.0",
     "esbuild": "^0.14.1",
+    "framer-motion": "^5.4.5",
     "fs-extra": "^10.0.0",
     "typescript": "^4.5.2"
   },
