@@ -3,10 +3,7 @@ export const docs = [
     '1.pdf',
     '2.pdf',
     '3.pdf',
-    '1.png',
-    '2.png',
-    '3.png',
-    '4.png',
+    '4.pdf',
     '5.png',
     '6.png',
     '7.png',
@@ -44,26 +41,31 @@ export function buildRandomRectAnnot(instance) {
     return _annot
 }
 
-export const modalStyle = {
-    display: 'flex',
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 'auto',
-    minWidth: '540px',
-    height: '200px',
-    boxShadow: '0 0 10px',
-    backgroundColor: '#FFFFFFF0'
+export function buildRandomStickyAnnot(instance, rgb) {
+    const _annot = new instance.Core.Annotations.StickyAnnotation()
+    _annot.NoMove = false
+    _annot.PageNumber = 1
+    _annot.StrokeColor = new instance.Core.Annotations.Color(rgb.r,rgb.g,rgb.b)
+    _annot.X = 100 + getRandomInt(200)
+    _annot.Y = 100 + getRandomInt(200)
+    _annot.Author = 'Mark Chan'
+    _annot.Subject = 'Sticky Note';
+    _annot.setContents(`Test Content...`);
+    return _annot
 }
 
-export const closeStyle = { position: 'absolute', top: '10px', right: '10px', fontSize: '24px' }
-
-export const modalWrapper = {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center'
-}
-
-export const rowStyle = { flexDirection: 'row', display: 'flex', marginTop: '5px', padding:'10px'}
+export function addText(instance, texts) {
+    const { Annotations, annotationManager } = instance.Core
+    const freeText = new Annotations.FreeTextAnnotation()
+    freeText.PageNumber = 1
+    freeText.X = 250
+    freeText.Y = 200
+    freeText.Width = 150
+    freeText.Height = 50
+    freeText.setPadding(new Annotations.Rect(0, 0, 0, 0))
+    freeText.setContents(texts)
+    freeText.FontSize = '16pt'
+  
+    annotationManager.addAnnotation(freeText, { autoFocus: false })
+    annotationManager.redrawAnnotation(freeText)
+  }

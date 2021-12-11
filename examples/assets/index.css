@@ -21,6 +21,22 @@ iframe {
   height: 70vh;
 }
 
+.current {
+  border: 1px solid #9f0b3f;
+  border-radius: 3px;
+  height: 2.5rem;
+  font-size: 16px;
+  width: auto;
+  color: #9f0b3f;
+  background-color: white;
+  min-width: 165px;
+  margin: 0 15px;
+  font-weight: 400;
+  display: inline-block;
+  padding: 5px 15px;
+  vertical-align: bottom;
+}
+
 .buttons {
   border: 2px solid #007bff;
   border-radius: 3px;

@@ -1,33 +1,29 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import useInstance, {
   DocumentViewer,
   DocumentViewerSimpleDisplay,
 } from '../../src'
 import { getInitialWvOptions } from './utils'
-import Modal from "./Chakra/Modal";
-import Drawer from "./Chakra/Drawer";
+import Modal from './Chakra/Modal'
+import Drawer from './Chakra/Drawer'
+import PopoverAddText from './Chakra/PopoverAddText'
+import Annotate from './Chakra/Annotate'
 
 function Display() {
   const { instance, setInstance } = useInstance()
-  const [open, setOpen] = useState(false)
   const [fullUi, setSFullUi] = useState(false)
-  const ref = useRef(null)
-
-  function toggleModal() {
-    setOpen(!open)
-  }
 
   function simpleDisplay() {
     if (fullUi) {
-      setInstance(undefined);
-      setSFullUi(false);
+      setInstance(undefined)
+      setSFullUi(false)
     }
   }
 
   function showFullUi() {
     if (!fullUi) {
-      setInstance(undefined);
-      setSFullUi(true);
+      setInstance(undefined)
+      setSFullUi(true)
     }
   }
 
@@ -37,16 +33,25 @@ function Display() {
 
   return (
     <>
-      <div style={{ marginBottom: "10px" }}>
-        <button onClick={simpleDisplay} className="buttons">
+      <div style={{ margin: '10px 0' }}>
+        <button onClick={simpleDisplay} className='buttons'>
           Simple Display
         </button>
-        <button onClick={showFullUi} className="buttons">
+        <button onClick={showFullUi} className='buttons'>
           Full UI
         </button>
+          <div className='current'>
+            Current Component:{' '}
+            {fullUi ? `<DocumentViewer />` : `<DocumentViewerSimpleDisplay />`}
+          </div>
       </div>
-      <Modal />
-      <Drawer />
+      <hr />
+      <div style={{margin:'15px 0'}}>
+        <Modal />
+        <Drawer />
+        <PopoverAddText />
+        <Annotate />
+      </div>
       {fullUi ? (
         <DocumentViewer {...getInitialWvOptions()} />
       ) : (
