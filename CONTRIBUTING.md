@@ -20,6 +20,7 @@
 4. Lint your code with `npm run lint`.
 5. Commit and push the changes with descriptive messages.
 6. Create a pull request to `master`.
+* Your PR will be reviewed and approved by at least 1 of the maintainers before merging.
 
 \* Please note that all pull requests should be tied to an issue, and all but the most trivial pull requests should be discussed before hand.
 
