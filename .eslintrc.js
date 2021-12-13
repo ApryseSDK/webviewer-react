@@ -35,7 +35,7 @@ module.exports = {
         builtinGlobals: true
       }
     ],
-    "ban-ts-ignore": false,
+    "ban-ts-ignore": 0,
     'brace-style': 2,
     'no-alert': 0,
     'no-console': [
@@ -70,6 +70,7 @@ module.exports = {
     'react/jsx-closing-bracket-location': 2,
     'react/jsx-curly-spacing': 2,
     'react/jsx-boolean-value': 2,
+    'react/no-unescaped-entities': 0,
     'react/prop-types': 2,
     'react-hooks/rules-of-hooks': 2,
     'react-hooks/exhaustive-deps': 1,
@@ -80,7 +81,9 @@ module.exports = {
     'import/extensions': 0,
     'import/no-extraneous-dependencies': 0,
     'import/no-dynamic-require': 0,
-    '@pdftron/webviewer/no-string-events': 0,
+    '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/ban-ts-ignore': 'off',
+    '@typescript-eslint/no-empty-function': 'off',
     'space-infix-ops': ['error', { int32Hint: false }],
     'no-use-before-define': 0,
     'implicit-arrow-linebreak': 0,

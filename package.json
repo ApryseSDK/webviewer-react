@@ -9,7 +9,8 @@
     "startctx": "npm run build && esbuild --bundle examples/Context/index.js --loader:.js=jsx --outfile=www/main.js --servedir=www",
     "ts-types": " tsc -d --emitDeclarationOnly --outDir lib/context",
     "build": "node ./esbuild.js && npm run ts-types",
-    "preparevwlib": "node copy-webviewer-file.js"
+    "preparevwlib": "node copy-webviewer-file.js",
+    "lint": "eslint --fix ./src ./examples"
   },
   "repository": {
     "type": "git",
