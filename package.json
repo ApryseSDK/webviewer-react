@@ -6,14 +6,15 @@
   "types": "src/index.d.ts",
   "scripts": {
     "build": "node ./esbuild.js && npm run ts-types",
-    "deploydemo": "npm run beforestart && esbuild --bundle examples/Context/index.js --loader:.js=jsx --outfile=www/main.js && firebase deploy --only hosting:pdftron-ychen02",
     "removewww": "rm -rf www",
     "copypublic": "mkdir www && cp -r examples/assets/. www/",
     "copybuild": "cp -r lib www/lib",
     "beforestart": "npm run removewww && npm run build && npm run copypublic && npm run copybuild && node copy-webviewer-file.js",
     "start": "npm run beforestart && esbuild --bundle examples/Context/index.js --loader:.js=jsx --outfile=www/main.js --servedir=www",
     "ts-types": " tsc -d --emitDeclarationOnly --outDir lib/context",
-    "installpeer": "npm i react react-dom @types/react @types/react-dom @pdftron/webviewer"
+    "installpeer": "npm i react react-dom @pdftron/webviewer",
+    "preparevwlib": "node copy-webviewer-file.js",
+    "lint": "eslint --fix ./src ./examples"
   },
   "repository": {
     "type": "git",
@@ -31,15 +32,26 @@
     "@chakra-ui/react": "^1.7.3",
     "@emotion/react": "^11.7.0",
     "@emotion/styled": "^11.6.0",
-    "esbuild": "^0.14.1",
     "framer-motion": "^5.4.5",
+    "@typescript-eslint/eslint-plugin": "^5.6.0",
+    "@typescript-eslint/parser": "^5.6.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "esbuild": "^0.14.1",
+    "eslint": "^8.4.1",
+    "eslint-plugin-react": "^7.27.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-import-resolver-typescript": "^2.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-typescript": "^0.14.0",
     "fs-extra": "^10.0.0",
-    "typescript": "^4.5.2"
+    "typescript": "^4.5.2",
+    "prettier": "^1.19.1"
   },
   "peerDependencies": {
     "@pdftron/webviewer": "^8.2.0",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0"
   },

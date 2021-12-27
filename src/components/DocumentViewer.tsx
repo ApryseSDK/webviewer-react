@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from 'react'
-import useInstance from '../context'
-import WebViewer from '@pdftron/webviewer'
-import type { WebViewerOptions } from '@pdftron/webviewer'
+import React, { useEffect, useRef } from 'react';
+import useInstance from '../context';
+import WebViewer from '@pdftron/webviewer';
+import type { WebViewerOptions } from '@pdftron/webviewer';
+import PropTypes from 'prop-types';
 
 export type TProps = {
   className?: string
@@ -11,21 +12,22 @@ export type TRef = React.RefObject<HTMLDivElement>
 
 const DocumentViewer = React.forwardRef<TRef, TProps>(
   ({ className, ...rest }, ref) => {
-    const localRef =
-      (ref as React.RefObject<HTMLDivElement>) || useRef<HTMLDivElement>(null)
-
-    const { instance, setInstance } = useInstance()
+    const localRef = useRef<HTMLDivElement>(null);
+    const { instance, setInstance } = useInstance();
 
     useEffect(() => {
-      if (!instance) {
+      if (!instance) 
         WebViewer(rest, localRef.current as HTMLDivElement).then(ins => {
-          setInstance(ins)
-        })
-      }
-    }, [])
+          setInstance(ins);
+        });
+    }, []);
 
-    return <div className={className} ref={localRef} />
+    return <div className={className} ref={ref ? ref as React.RefObject<HTMLDivElement> : localRef} />;
   }
-)
+);
 
-export default DocumentViewer
+DocumentViewer.propTypes = {
+  className: PropTypes.string
+};
+
+export default DocumentViewer;

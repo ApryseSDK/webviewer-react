@@ -1,0 +1,39 @@
+# Configuration for welcome - https://github.com/behaviorbot/welcome
+newIssueWelcomeComment: >
+  Thanks for opening your first issue here! Be sure to follow the new issue guideline!
+
+newPRWelcomeComment: >
+  Thanks for opening this pull request!
+
+firstPRMergeComment: >
+  Congrats on merging your first pull request! 🥳🎉
+
+# Configuration for request-info - https://github.com/behaviorbot/request-info
+
+requestInfoReplyComment: >
+  We would appreciate it if you could provide us with more info about it!
+
+# Configuration for probot-stale - https://github.com/probot/stale
+
+daysUntilStale: 60
+
+daysUntilClose: 7
+
+onlyLabels: []
+
+exemptLabels: []
+
+exemptProjects: false
+
+exemptMilestones: false
+
+exemptAssignees: false
+
+staleLabel: wontfix
+
+markComment: >
+  This issue has been automatically marked as stale because it has not had
+  recent activity. It will be closed if no further activity occurs. Thank you
+  for your contributions.
+
+limitPerRun: 30
