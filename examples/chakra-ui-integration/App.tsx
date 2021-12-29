@@ -1,20 +1,19 @@
-import React from 'react'
-import { DocumentViewerProvider } from '../../src'
+import React from 'react';
+import { DocumentViewerProvider } from '../../www/lib';
 import { ChakraProvider } from "@chakra-ui/react";
-import Body from './Body'
-import '../_css/App.css'
+import Body from './Body';
 
 const App = () => {
 
   return (
     <ChakraProvider>
       <DocumentViewerProvider>
-        <div className='App'>
+        <div className="App">
           <Body />
         </div>
       </DocumentViewerProvider>
     </ChakraProvider>
-  )
-}
+  );
+};
 
-export default App
+export default App;

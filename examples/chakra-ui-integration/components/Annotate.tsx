@@ -1,7 +1,7 @@
 //collection of tools
-import React from 'react'
-import { ChatIcon as StickyNote, EditIcon as TextTool } from '@chakra-ui/icons'
-import useInstance from '../../../src'
+import React from 'react';
+import { ChatIcon as StickyNote, EditIcon as TextTool } from '@chakra-ui/icons';
+import useInstance from '../../../www/lib';
 import {
   Flex,
   PopoverHeader,
@@ -13,68 +13,69 @@ import {
   PopoverArrow,
   PopoverCloseButton,
   useDisclosure,
-} from '@chakra-ui/react'
-import { buildRandomStickyAnnot } from '../utils'
+} from '@chakra-ui/react';
+import { buildRandomStickyAnnot } from '../utils';
 
 export default function Annotate() {
-  const { onOpen, onClose, isOpen } = useDisclosure()
-  const { instance } = useInstance()
-  const colors = ['red', 'blue', 'black', 'green']
+  const { onOpen, onClose, isOpen } = useDisclosure();
+  const { instance } = useInstance();
+  const colors = ['red', 'blue', 'black', 'green'];
   function edit(e) {
-    const color = e.target.dataset.color
+    const color = e.target.dataset.color;
     switch (color) {
       case 'red':
-        instance.UI.setToolMode('AnnotationCreateFreeHand')
-        break
+        instance.UI.setToolMode('AnnotationCreateFreeHand');
+        break;
       case 'green':
-        instance.UI.setToolMode('AnnotationCreateFreeHand4')
-        break
+        instance.UI.setToolMode('AnnotationCreateFreeHand4');
+        break;
       case 'blue':
-        instance.UI.setToolMode('AnnotationCreateFreeHand2')
-        break
+        instance.UI.setToolMode('AnnotationCreateFreeHand2');
+        break;
       case 'black':
-        instance.UI.setToolMode('AnnotationCreateFreeHand3')
-        break
+        instance.UI.setToolMode('AnnotationCreateFreeHand3');
+        break;
       default:
-        break
+        break;
     }
   }
   function addSticky(e) {
-    const color = e.target.dataset.color
-    let rgb = {}
+    const color = e.target.dataset.color;
+    let rgb = {};
     switch (color) {
       case 'red':
-        rgb = { r: 229, g: 62, b: 62 }
-        break
+        rgb = { r: 229, g: 62, b: 62 };
+        break;
       case 'green':
-        rgb = { r: 56, g: 161, b: 105 }
-        break
+        rgb = { r: 56, g: 161, b: 105 };
+        break;
       case 'blue':
-        rgb = { r: 49, g: 130, b: 206 }
-        break
+        rgb = { r: 49, g: 130, b: 206 };
+        break;
       case 'black':
-        rgb = { r: 0, g: 0, b: 0 }
-        break
+        rgb = { r: 0, g: 0, b: 0 };
+        break;
       default:
-        break
+        break;
     }
-    const annot = buildRandomStickyAnnot(instance, rgb)
-    instance.Core.annotationManager.addAnnotation(annot)
-    instance.Core.annotationManager.redrawAnnotation(annot)
+    const annot = buildRandomStickyAnnot(instance, rgb);
+    instance.Core.annotationManager.addAnnotation(annot);
+    instance.Core.annotationManager.redrawAnnotation(annot);
   }
   return (
     <Popover
-      placement='right'
+      placement="right"
       isOpen={isOpen}
       onOpen={onOpen}
-      onClose={onClose}>
+      onClose={onClose}
+    >
       <PopoverTrigger>
-        <Button colorScheme='blue' mr={3}>
+        <Button colorScheme="blue" mr={3}>
           Popover Add Annotation
         </Button>
       </PopoverTrigger>
-      <PopoverContent bg='white'>
-        <PopoverHeader pt={4} fontSize='22' fontWeight='bold' border='0'>
+      <PopoverContent bg="white">
+        <PopoverHeader pt={4} fontSize="22" fontWeight="bold" border="0">
           Annotation
         </PopoverHeader>
         <PopoverArrow />
@@ -84,14 +85,15 @@ export default function Annotate() {
           <Flex justifyContent={'space-between'} mb={3}>
             {colors.map(color => (
               <Button
-                transform='scaleX(-1)'
+                transform="scaleX(-1)"
                 key={color + '_sticky'}
                 data-color={color}
-                colorScheme='black'
-                variant='outline'
-                onClick={addSticky}>
+                colorScheme="black"
+                variant="outline"
+                onClick={addSticky}
+              >
                 <StickyNote
-                  pointerEvents='none'
+                  pointerEvents="none"
                   w={7}
                   h={7}
                   color={`${color}.500`}
@@ -107,10 +109,11 @@ export default function Annotate() {
                 onClick={edit}
                 key={color + '_draw'}
                 data-color={color}
-                colorScheme='black'
-                variant='outline'>
+                colorScheme="black"
+                variant="outline"
+              >
                 <TextTool
-                  pointerEvents='none'
+                  pointerEvents="none"
                   w={7}
                   h={7}
                   color={`${color}.500`}
@@ -122,5 +125,5 @@ export default function Annotate() {
         </PopoverBody>
       </PopoverContent>
     </Popover>
-  )
+  );
 }
