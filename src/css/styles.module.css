@@ -1,0 +1,57 @@
+.documentViewer {
+  position: relative;
+}
+
+.documentViewer:hover .controlsBar {
+  opacity: 1;
+}
+
+.controlsBar {
+  position: absolute;
+  bottom: 4%;
+  left: 50%;
+  padding: 3px;
+  background: #485056;
+  color: white;
+  opacity: 0;
+  transition: opacity ease-in-out 0.12s;
+  transform: translateX(-50%);
+  box-shadow: 0 1px 15px 1px rgb(164 164 164 / 25%);
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+.controlsBar button {
+  margin:0 4px;
+  min-width: 25px;
+  background: none;
+  border: 0;
+  font: inherit;
+  border-radius: 4px;
+  transition: background-color ease-in-out 0.12s;
+}
+
+.controlsBar button:hover {
+  background: #21242a;
+}
+
+.controlsBar input {
+  background: none;
+  padding: 5px;
+  max-height: 26px;
+}
+
+.controlsBar input[data-action="changePageNum"] {
+  text-align: center;
+}
+
+.iconChevron {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.iconChevronLeft {
+  transform: scale(-1);
+  display: inline-block;
+  vertical-align: middle;
+}
