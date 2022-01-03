@@ -1,5 +1,5 @@
 // Credit: Andrey Safonov @andreysaf
-
+// eslint-disable-next-line
 const fs = require('fs-extra');
 
 const copyFiles = async () => {
