@@ -15,14 +15,14 @@ function Display() {
 
   function simpleDisplay() {
     if (fullUi) {
-      setInstance(undefined);
+      setInstance();
       setSFullUi(false);
     }
   }
 
   function showFullUi() {
     if (!fullUi) {
-      setInstance(undefined);
+      setInstance();
       setSFullUi(true);
     }
   }
