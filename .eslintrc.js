@@ -20,7 +20,7 @@ module.exports = {
   plugins: ['react', '@typescript-eslint', 'react-hooks', 'import'],
   rules: {
     quotes: [
-      0,
+      2,
       'single',
       {
         allowTemplateLiterals: true
@@ -35,8 +35,9 @@ module.exports = {
         builtinGlobals: true
       }
     ],
-    "ban-ts-ignore": 0,
+    'ban-ts-ignore': 0,
     'brace-style': 2,
+    'max-len': [2, { 'code': 150 }],
     'no-alert': 0,
     'no-console': [
       0,
@@ -73,7 +74,7 @@ module.exports = {
     'react/no-unescaped-entities': 0,
     'react/prop-types': 2,
     'react-hooks/rules-of-hooks': 2,
-    'react-hooks/exhaustive-deps': 1,
+    'react-hooks/exhaustive-deps': 0,
     'react/sort-comp': 0,
     'react/no-find-dom-node': 0,
     'react/display-name': 0,
