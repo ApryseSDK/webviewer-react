@@ -1,4 +1,6 @@
-const esbuild = require('esbuild')
+/* eslint-disable @typescript-eslint/no-var-requires */
+const esbuild = require('esbuild');
+const cssModulesPlugin = require('esbuild-css-modules-plugin');
 
 esbuild
   .build({
@@ -10,6 +12,7 @@ esbuild
     splitting: true,
     format: 'esm',
     target: ['es6'],
-    external:['react','@pdftron/webviewer']
+    external: ['react', '@pdftron/webviewer'],
+    plugins: [cssModulesPlugin()]
   })
-  .catch(() => process.exit(1))
+  .catch(() => process.exit(1));
