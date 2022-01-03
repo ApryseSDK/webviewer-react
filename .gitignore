@@ -10,5 +10,6 @@ package-lock.json
 www
 lib
 *.d.ts
+!src/Global.d.ts
 .firebaserc
 firebase.json
