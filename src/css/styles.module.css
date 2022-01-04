@@ -1,9 +1,14 @@
 .documentViewer {
   position: relative;
+  height: 100%;
 }
 
 .documentViewer:hover .controlsBar {
   opacity: 1;
+}
+
+.documentViewer > div:first-child {
+  height:100%;
 }
 
 .controlsBar {
