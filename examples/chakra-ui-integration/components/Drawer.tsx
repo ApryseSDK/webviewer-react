@@ -72,7 +72,7 @@ function DrawerI() {
 
   return (
     <>
-      <Button ref={btnRef} colorScheme="blue" mr={3} onClick={onOpen}>
+      <Button ref={btnRef} colorScheme="blue" m="2" width="100%" onClick={onOpen}>
         Search Texts in Drawer
       </Button>
       <Drawer

@@ -70,7 +70,7 @@ export default function Annotate() {
       onClose={onClose}
     >
       <PopoverTrigger>
-        <Button colorScheme="blue" mr={3}>
+        <Button colorScheme="blue" m="2" width="100%">
           Popover Add Annotation
         </Button>
       </PopoverTrigger>

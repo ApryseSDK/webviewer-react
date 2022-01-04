@@ -63,7 +63,7 @@ function ModalI() {
 
   return (
     <>
-      <Button onClick={onOpen} colorScheme="blue" mr={3}>
+      <Button onClick={onOpen} colorScheme="blue" m="2" width="100%">
         Document Controls In Modal
       </Button>
 
