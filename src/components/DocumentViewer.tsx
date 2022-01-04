@@ -53,8 +53,8 @@ const DocumentViewer = React.forwardRef<TRef, TProps>(
     }, [instance]);
 
     return (
-      <div className={styles.documentViewer}>
-        <div className={className} ref={ref ? ref as unknown as React.RefObject<HTMLDivElement> : localRef} />
+      <div className={className ? `${styles.documentViewer} ${className}` : styles.documentViewer}> 
+        <div ref={ref ? ref as unknown as React.RefObject<HTMLDivElement> : localRef} />
         {simpleUiPrepared && isSimpleDisplay && <ControlsBar />}
       </div>);
   }
