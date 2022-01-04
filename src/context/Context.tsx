@@ -1,57 +1,41 @@
 // @ts-ignore
 import React, {
-  useState,
   createContext,
   PropsWithChildren,
-  ReactNode
-} from 'react'
-import WebViewer, { WebViewerInstance } from '@pdftron/webviewer'
+  ReactNode,
+  useMemo,
+  useState,
+} from 'react';
+import type { WebViewerInstance } from '@pdftron/webviewer';
 
 export type TProviderProp = {
-  libLocation: string,
-  children: ReactNode
+  children: ReactNode,
+  instance?: WebViewerInstance
 }
 
 export type TContextState = {
-  instances: object,
-  addInstance: Function
-}
-
-export type TKeyInstancePair = {
-  [key: string]: WebViewerInstance
+  instance: WebViewerInstance | undefined
+  setInstance(arg: WebViewerInstance): void
 }
 
 const DocumentViewerContext = createContext<TContextState>({
-  instances: {},
-  addInstance: async () => { },
-})
+  instance: undefined,
+  setInstance: () => {}
+});
 
-function DocumentViewerProvider({ children, libLocation }: PropsWithChildren<TProviderProp>): JSX.Element {
+function DocumentViewerProvider({
+  children, instance
+}: PropsWithChildren<TProviderProp>): JSX.Element { 
 
-  const [instances, setInstances] = useState<TKeyInstancePair>({})
-  const value = { instances, addInstance }
+  const [instanceState, setInstance] = useState<WebViewerInstance | undefined>(instance);
 
-  async function addInstance(
-    initialDoc: string,
-    UID: string,
-    DVElement: HTMLElement
-  ) {
-    const instance = await WebViewer(
-      {
-        path: libLocation,
-        initialDoc: initialDoc,
-        disabledElements: ['header', 'toolsHeader', 'pageNavOverlay', 'textPopup', 'contextMenuPopup']
-      },
-      DVElement
-    )
-    setInstances({ ...instances, [UID]: instance })
-  }
+  const value = useMemo(() => ({ instance: instanceState, setInstance }),[instanceState, setInstance]);
 
   return (
     <DocumentViewerContext.Provider value={value}>
       {children}
     </DocumentViewerContext.Provider>
-  )
+  );
 }
 
-export { DocumentViewerContext, DocumentViewerProvider }
+export { DocumentViewerContext, DocumentViewerProvider };

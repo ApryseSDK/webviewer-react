@@ -1,5 +1,5 @@
-import useInstances, {DocumentViewerContext, DocumentViewerProvider} from "./context";
-import { DocumentViewer } from "./components";
+import useInstance, { DocumentViewerContext, DocumentViewerProvider } from "./context";
+import { DocumentViewer, DocumentViewerSimpleDisplay } from "./components";
 
-export default useInstances
-export {DocumentViewerContext, DocumentViewerProvider, DocumentViewer}
+export default useInstance;
+export { DocumentViewerContext, DocumentViewerProvider, DocumentViewer, DocumentViewerSimpleDisplay };
