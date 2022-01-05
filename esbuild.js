@@ -1,4 +1,4 @@
-const esbuild = require('esbuild')
+const esbuild = require('esbuild');
 
 esbuild
   .build({
@@ -12,4 +12,4 @@ esbuild
     target: ['es6'],
     external:['react','@pdftron/webviewer']
   })
-  .catch(() => process.exit(1))
+  .catch(() => process.exit(1));
