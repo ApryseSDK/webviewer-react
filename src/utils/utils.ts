@@ -3,7 +3,6 @@ export const DISABLED_ELEMENTS = [
   'toolsHeader',
   'viewControlsButton',
   'leftPanelButton',
-  'pageNavOverlay',
   'searchButton',
   'menuButton',
   'textPopup',
