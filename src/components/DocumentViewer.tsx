@@ -18,10 +18,9 @@ const DocumentViewer = React.forwardRef<TRef, TProps>(
 
     function prepareSimpleUi (instance: WebViewerInstance) {
       const { documentViewer, DisplayMode, DisplayModes } = instance.Core;
-      const { FitMode } = instance.UI;
       const displayMode = documentViewer.getDisplayModeManager();
       displayMode.setDisplayMode(new DisplayMode(documentViewer, DisplayModes.Single));
-      instance.UI.setFitMode(FitMode.FitPage);
+      instance.UI.setFitMode(instance.UI.FitMode.FitPage);
     }
 
     useEffect(() => {
@@ -33,7 +32,7 @@ const DocumentViewer = React.forwardRef<TRef, TProps>(
       else if (isSimpleDisplay) prepareSimpleUi(instance);
     }, []);
 
-    return <div className={className} ref={ref ? ref as undefined as React.RefObject<HTMLDivElement> : localRef} />;
+    return <div className={className} ref={ref ? ref as unknown as React.RefObject<HTMLDivElement> : localRef} />;
   }
 );
 
