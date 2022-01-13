@@ -26,7 +26,9 @@ const DocumentViewer = React.forwardRef<TRef, TProps>(
     useEffect(() => {
       if (!instance) 
         WebViewer(rest, localRef.current as HTMLDivElement).then(ins => {
-          if (isSimpleDisplay) ins.Core.documentViewer.addEventListener('documentLoaded', () => prepareSimpleUi(ins));
+          if (isSimpleDisplay) ins.Core.documentViewer.addEventListener('documentLoaded', () => {
+            prepareSimpleUi(ins);
+          }, { once: true });
           setInstance(ins);
         });
       else if (isSimpleDisplay) prepareSimpleUi(instance);
