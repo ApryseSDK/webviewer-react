@@ -6,32 +6,25 @@ import PropTypes from 'prop-types';
 
 export type TProps = {
   className?: string
-  isSimpleDisplay?: boolean
+  prepareSimpleUi?: (instance: WebViewerInstance) => void;
 } & WebViewerOptions
 
 export type TRef = React.RefObject<HTMLDivElement>
 
 const DocumentViewer = React.forwardRef<TRef, TProps>(
-  ({ isSimpleDisplay, className, ...rest }, ref) => {
+  ({ prepareSimpleUi, className, ...rest }, ref) => {
     const localRef = useRef<HTMLDivElement>(null);
     const { instance, setInstance } = useInstance();
-
-    function prepareSimpleUi (instance: WebViewerInstance) {
-      const { documentViewer, DisplayMode, DisplayModes } = instance.Core;
-      const displayMode = documentViewer.getDisplayModeManager();
-      displayMode.setDisplayMode(new DisplayMode(documentViewer, DisplayModes.Single));
-      instance.UI.setFitMode(instance.UI.FitMode.FitPage);
-    }
 
     useEffect(() => {
       if (!instance) 
         WebViewer(rest, localRef.current as HTMLDivElement).then(ins => {
-          if (isSimpleDisplay) ins.Core.documentViewer.addEventListener('documentLoaded', () => {
+          if (prepareSimpleUi) ins.Core.documentViewer.addEventListener('documentLoaded', () => {
             prepareSimpleUi(ins);
           }, { once: true });
           setInstance(ins);
         });
-      else if (isSimpleDisplay) prepareSimpleUi(instance);
+      else if (prepareSimpleUi) prepareSimpleUi(instance);
     }, []);
 
     return <div className={className} ref={ref ? ref as unknown as React.RefObject<HTMLDivElement> : localRef} />;
@@ -40,7 +33,7 @@ const DocumentViewer = React.forwardRef<TRef, TProps>(
 
 DocumentViewer.propTypes = {
   className: PropTypes.string,
-  isSimpleDisplay: PropTypes.bool
+  prepareSimpleUi: PropTypes.func
 };
 
 export default DocumentViewer;
