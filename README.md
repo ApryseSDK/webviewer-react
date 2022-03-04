@@ -15,7 +15,7 @@ npm i @pdftron/webviewer @pdftron/webviewer-react
 Inside you app's root component (or the place where you setup context providers):
 
 ```
-import { DocumentViewerProvider } from ''
+import { DocumentViewerProvider } from '@pdftron/webviewer-react'
 ...
   return (
     <DocumentViewerProvider>
@@ -24,9 +24,9 @@ import { DocumentViewerProvider } from ''
   )
 ```
 **IMPORTANT:** You will need to host the library files which can be found in './node_modules/@pdftron/webviewer/public' then provide the URL to the `path` option at the place where you initialize WebViewer instance. 
-After that, place the `<DocumentViewer />` or the `<DocumentViewerSimpleDisplay />` component in your app where you want to display the documents. 
+After that, place the `<DocumentViewer />` or the `<DocumentViewerSimpleDisplay />` component in your app where you want to display your document. 
 ```
-import { DocumentViewerSimpleDisplay } from ''
+import { DocumentViewerSimpleDisplay } from '@pdftron/webviewer-react'
 ...
   return (
     <>
@@ -88,7 +88,7 @@ The asset files are located in `node_modules/@pdftron/webviewer/public` and must
 ### Setup the context provider
 At the place where you setup context providers for your app, import and place the `DocumentViewerProvider` component. Components warpped inside this provider can gain access to the powerful `webviewer instance` which will be explained in other sections.
 ```
-import { DocumentViewerProvider } from ''
+import { DocumentViewerProvider } from '@pdftron/webviewer-react'
 ...
   return (
     <DocumentViewerProvider>
@@ -101,15 +101,19 @@ import { DocumentViewerProvider } from ''
 ### DocumentViewer
 This component displays the loaded document itself as well as the UI for document manipulation. It needs to be placed inside the context provider which is set in the installtaion steps.
 
-| Prop Name | Description | Test Text | Test Text | 
+| Prop Name | Description | Type | Required | 
 | :--- | :----: | :----: | ---: | 
+| onReady | Callback after the document file is loaded | `function` | No| 
+| className | Defines class name for the element on which webviewer is rendered. | `string` | No| 
+| ref | Sets the alternative element where webviewer will render.  | `RefObject<HTMLInputElement>` | No| 
+| options | 2 | 3 | 4| 
 | 1 | 2 | 3 | 4| 
 ### DocumentViewerSimpleDisplay
-| Prop Name | Description | Test Text | Test Text | 
+| Prop Name | Description | Type | Required | 
 | :--- | :----: | :----: | ---: | 
 | 1 | 2 | 3 | 4| 
 ### DocumentProvider
-| Prop Name | Description | Test Text | Test Text | 
+| Prop Name | Description | Type | Required | 
 | :--- | :----: | :----: | ---: | 
 | 1 | 2 | 3 | 4| 
 ## Hooks
