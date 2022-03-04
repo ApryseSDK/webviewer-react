@@ -1,31 +1,17 @@
 # WebViewer-React
+Display PDFs, MS Office documents, images and even videos in your React app with ease.
+WebViewer-React wraps PDFTron's [WebViewer](https://www.pdftron.com/documentation/web/) as a React component and you will have controls over the powerful webviewer instance anywhere in your app.
 
-A React component for displaying document in your React app. It is developed with PDFTron's [WebViewer](https://www.pdftron.com/documentation/web/) library & React context APIs. Not only it wraps the WebViewer inside a React component, you will also have control over the WebViewer instance everywhere in your app.
-Want to handle the document inside you cool modal component? No problem.
+## Demo
+Online demo can be found [here](https://www.pdftron.com/webviewer/demo/) 
 
-## Live Demo
-[Demo](https://pdftron-ychen02.web.app/) 
-## Run the demo locally
-
-To run the demo with `<DocumentViewer />` component:
-
-```
-git clone https://github.com/PDFTron/webviewer-react.git
-npm i && npm run installpeer
-npm run start
-```
-
-The above commands will install all dependencies, build the component and store the compiled module inside `www/lib/` folder, from where the example app will make imports for components / context hooks. After running the command you will be able to see the app live at `http://127.0.0.1:8000`.
-
-## To use this library in your own React project
-
-(package to be published to registry)
+## To use this library in your React app:
 
 ```
 npm i @pdftron/webviewer @pdftron/webviewer-react
 ```
 
-Inside you app's root component (where you setup all other providers):
+Inside you app's root component (or the place where you setup context providers):
 
 ```
 import { DocumentViewerProvider }
@@ -36,10 +22,8 @@ import { DocumentViewerProvider }
     </DocumentViewerProvider>
   )
 ```
-
-**IMPORTANT:** You will need to copy the library assets from './node_modules/@pdftron/webviewer/public' and place them at a location where you are able to serve them. Then provide the URL of these assets to the `path` option at the place where you initialize WebViewer instance. After that, simply create a ref and pass that into both WebViewer's initializer and the `<DocumentViewer/>` component.
-
-For example:
+**IMPORTANT:** You will need to host the library files which can be found in './node_modules/@pdftron/webviewer/public' then provide the URL to the `path` option at the place where you initialize WebViewer instance. 
+After that, create a ref and pass that into both WebViewer's initializer and the `<DocumentViewer/>` component:
 
 ```
 // YourComponent.tsx
