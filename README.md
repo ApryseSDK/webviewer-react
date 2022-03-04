@@ -37,5 +37,8 @@ import { DocumentViewerSimpleDisplay } from '@pdftron/webviewer-react'
 ```
 That's it! You should see your document being presented on your page. 
 
+## Full Documentation
+Please refer to the DOCUMENTATION.md
+
 ## Contributing
 If you are interested in helping contribute to this project, please take a look at our CONTRIBUTING guide.
