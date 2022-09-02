@@ -19,9 +19,7 @@ const DocumentViewer = React.forwardRef<TRef, TProps>(
     useEffect(() => {
       if (!instance) 
         WebViewer(rest, localRef.current as HTMLDivElement).then(ins => {
-          if (onReady) ins.Core.documentViewer.addEventListener('documentLoaded', () => {
-            onReady(ins);
-          }, { once: true });
+          if (onReady) onReady(ins);
           setInstance(ins);
         });
       else if (onReady) onReady(instance);

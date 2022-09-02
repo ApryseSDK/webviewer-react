@@ -8,10 +8,12 @@ import PropTypes from 'prop-types';
 const DocumentViewerSimpleDisplay = React.forwardRef<TRef, TProps>(({ onReady, ...rest }, ref) => {
 
   const prepareSingleFitPageDisplay = useCallback((instance: WebViewerInstance) => {
-    const { documentViewer, DisplayMode, DisplayModes } = instance.Core;
-    const displayMode = documentViewer.getDisplayModeManager();
-    displayMode.setDisplayMode(new DisplayMode(documentViewer, DisplayModes.Single));
-    instance.UI.setFitMode(instance.UI.FitMode.FitPage);
+    instance.Core.documentViewer.addEventListener('documentLoaded', () => {
+      const { documentViewer, DisplayMode, DisplayModes } = instance.Core;
+      const displayMode = documentViewer.getDisplayModeManager();
+      displayMode.setDisplayMode(new DisplayMode(documentViewer, DisplayModes.Single));
+      instance.UI.setFitMode(instance.UI.FitMode.FitPage);
+    }, { once: true });
     if (onReady) onReady(instance);
   }, []);
   
