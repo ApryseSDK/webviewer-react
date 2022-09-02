@@ -53,7 +53,7 @@
     "typescript-plugin-css-modules": "^3.4.0"
   },
   "peerDependencies": {
-    "@pdftron/webviewer": "^8.2.0",
+    "@pdftron/webviewer": "8.2.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0"
   },
@@ -70,7 +70,7 @@
     ]
   },
   "dependencies": {
-    "@pdftron/webviewer": "^8.8.0",
+    "@pdftron/webviewer": "8.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   }
