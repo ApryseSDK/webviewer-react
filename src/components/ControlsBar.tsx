@@ -83,14 +83,14 @@ const ControlsBar = ({ className = '' }) => {
     const currentpage = documentViewer.getCurrentPage();
     switch (e.target.dataset.action) {
       case ('prevPage'):
-        if (currentpage > 1) documentViewer.setCurrentPage(currentpage - 1);
+        if (currentpage > 1) documentViewer.setCurrentPage(currentpage - 1, true);
         break;
       case ('nextPage'):
-        if (currentpage < pageCount) documentViewer.setCurrentPage(currentpage + 1);
+        if (currentpage < pageCount) documentViewer.setCurrentPage(currentpage + 1,true);
         break;
       case ('changePageNum'):
         if (e.target.value && e['key'] === 'Enter') 
-          documentViewer.setCurrentPage(parseInt(e.target.value));
+          documentViewer.setCurrentPage(parseInt(e.target.value),true);
         break;
       default: break;
     }
