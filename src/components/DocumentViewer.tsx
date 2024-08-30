@@ -16,14 +16,18 @@ const DocumentViewer = React.forwardRef<TRef, TProps>(
     const localRef = useRef<HTMLDivElement>(null);
     const { instance, setInstance } = useInstance();
 
+    rest.path = '/lib';
+    rest.initialDoc = 'demo-annotated.pdf';
+    rest.licenseKey = 'License Key Here';
+
     useEffect(() => {
       if (!instance) 
-        WebViewer(rest, localRef.current as HTMLDivElement).then(ins => {
+        WebViewer(rest, localRef.current as HTMLDivElement).then(ins => { 
           if (onReady) onReady(ins);
           setInstance(ins);
         });
       else if (onReady) onReady(instance);
-    }, []);
+    });
 
     return <div className={className} ref={ref ? ref as unknown as React.RefObject<HTMLDivElement> : localRef} />;
   }

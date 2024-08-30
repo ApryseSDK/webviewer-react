@@ -1,83 +1,110 @@
-# WebViewer-React
+# WebViewer in React Using Context APIs
 
-A React component for displaying document in your React app. It is developed with PDFTron's [WebViewer](https://www.pdftron.com/documentation/web/) library & React context APIs. Not only it wraps the WebViewer inside a React component, you will also have control over the WebViewer instance everywhere in your app.
-Want to handle the document inside you cool modal component? No problem.
+A React component for displaying documents in your React app. It is developed with Apryse's [WebViewer](https://docs.apryse.com/documentation/web/) library & [React context APIs](https://react.dev/learn/passing-data-deeply-with-context). The sample project wraps the WebViewer inside a React component and allows control over the WebViewer instance everywhere in the app. Do you want to handle the document inside you cool modal component? No problem, this sample project will help you simplify the process using Context API components.
 
-## Live Demo
-[Demo](https://pdftron-ychen02.web.app/) 
+![DocumentViewer and DocumentViewerSimpleDisplay Components shown side by side](2Components-side-side.png)
+
 ## Run the demo locally
 
-To run the demo with `<DocumentViewer />` component:
+To run the demo locally clone the repo and within your own react project, use the `<DocumentViewerProvider/>` or `<DocumentViewerSimpleDisplay/>` snippet to call a sample component.
+
+
+
+This repo is specifically designed for users interested in integrating a WebViewer instance into a React project. This project was generated with an `npx` Create React App command. 
+
+```
+npx create-react-app webviewer-react --template typescript
+```
+
+## Initial setup
+
+Before you begin, make sure your development environment includes [Node.js and npm](https://www.npmjs.com/get-npm).
+
+
+1. [Node.js](https://nodejs.org/en).
+2. IDE used in this sample is Visual Studio Code with an NPM extension to process commands within its terminal.
+3. [GitHub command line](https://github.com/git-guides/install-git) `git`.
+
+Inside your project at the level where your `package.json` exists, install the `webviewer` package.
+
+```
+npm i @pdftron/webviewer
+```
+
+Clone the repo to get the components to add them to your project.
 
 ```
 git clone https://github.com/PDFTron/webviewer-react.git
-npm i && npm run installpeer
-npm run start
-```
-
-The above commands will install all dependencies, build the component and store the compiled module inside `www/lib/` folder, from where the example app will make imports for components / context hooks. After running the command you will be able to see the app live at `http://127.0.0.1:8000`.
-
-## To use this library in your own React project
-
-(package to be published to registry)
 
 ```
-npm i @pdftron/webviewer @pdftron/webviewer-react
-```
 
-Inside you app's root component (where you setup all other providers):
+## Context API Components
+
+Inside the app's component there are calls to two components: 
+
+* `DocumentViewerProvider`
+* `DocumentViewerSimpleDisplay`
 
 ```
-import { DocumentViewerProvider }
-...
+//src/App.tsx
+
+import React from 'react';
+import './App.css';
+import DocumentViewerProvider from './components/DocumentViewer';
+import DocumentViewerSimpleDisplay from './components/DocumentViewerSimpleDisplay';
+
+
+function App() {
   return (
-    <DocumentViewerProvider>
-      <ComponentChildren />
-    </DocumentViewerProvider>
-  )
-```
+    <div className='App'>
 
-**IMPORTANT:** You will need to copy the library assets from './node_modules/@pdftron/webviewer/public' and place them at a location where you are able to serve them. Then provide the URL of these assets to the `path` option at the place where you initialize WebViewer instance. After that, simply create a ref and pass that into both WebViewer's initializer and the `<DocumentViewer/>` component.
+      <div className='topHalf'>
+      <h2> DocumentViewerProvider Component</h2>
+        <DocumentViewerProvider className='documentViewerProvider' path={''}/>
+      </div>
 
-For example:
-
-```
-// YourComponent.tsx
-import WebViewer from '@pdftron/webviewer'
-import { DocumentViewer } from '@pdftron/webviewer-react'
-...
-  const { setInstance } = useInstance()
-  const ref = useRef(null)
-  useEffect(() => {
-      ref?.current && WebViewer(
-        {
-          path: 'http://127.0.0.1:8000/webviewer/lib',
-          initialDoc: getRandomLocalDocUrl()
-        },
-        ref.current
-      ).then(instance => {
-        setInstance(instance)
-      })
-  }, [ref])
-
-  return (
-    <div id='someComponent'>
-      <p>Display the document below</p>
-      <DocumentViewer ref={ref}/>
+    <div className='bottomHalf'>
+    <h2> DocumentViewerSimpleDisplay Component</h2>
+     <DocumentViewerSimpleDisplay className='documentViewerSimpleDisplay' path={''}/>
     </div>
-  )
+   </div>
+  );
+}
 ```
 
-You will now be able to access the WebViewer instance at other places of your React app!
+You will need to copy the library assets from `./node_modules/@pdftron/webviewer/public` and place them at a location where you are able to serve them. In this sample project these library assets are copied over to `/public/lib/`. 
+
+Extract the components, context, and utils resources from the cloned repo (https://github.com/PDFTron/webviewer-react.git), from a previous step, and add them to the react project in a similar structure in the `src` folder.
 
 ```
-OtherComonent.tsx
-import useInstances from '@pdftron/webviewer-react'
-...
-const { instance } = useInstance()
+\src\components
+\src\context
+\src\utils
 ```
 
-For example if you want to create an annotation, just grab the annotationManager from the WebViewer instance, create an annotation object and add it to your document:
+In this sample project there are two components defined that use the WebViewer, `DocumentViewerProvider` and `DocumentViewerSimpleDisplay`. Each component defines certain features and in this project are displayed in parallel. 
+
+This approach faciliates accessing the WebViewer instance at other places of the React app. Simply call the instance with either of the below tags.
+
+```
+<DocumentViewerProvider className='documentViewerProvider'/>
+<DocumentViewerSimpleDisplay className='documentViewerSimpleDisplay'/>
+```
+
+## Run
+
+In Visual Studio Code or from a Command Prompt window, preview the app in `localhost` with an `npm` command. 
+
+```
+npm start
+```
+
+## Enable Annotations or the Tools Menu
+
+
+### Annotations
+
+If you want to create an annotation, just grab the annotationManager from the WebViewer instance, create an annotation object and add it to your document:
 
 ```
 const manager = instance.Core.annotationManager
@@ -97,21 +124,36 @@ rectangleAnnot.setContents('Comment on this rectangle')
 
 manager.addAnnotation(rectangleAnnot)
 ```
-Or if you want to enable the default PDFTron WebViewer Tools Menu:
+
+### Tools Menu
+
+
+To enable the default WebViewer Tools Menu, use the `enableElements` method.
+
 ```
 const el = ['toolsHeader']
 instance.UI.enableElements(el)
 ```
-Visit PDFTron's [WebViewer](https://www.pdftron.com/documentation/web/) page to see what else you can do with the WebViewer instance!
-## Installation for local development of this library
 
-```
-git clone https://github.com/PDFTron/webviewer-react.git
-cd webviewer-react
-npm i && npm run installpeer
-npm run preparevwlib
-```
+Visit Apryse's [WebViewer](https://docs.apryse.com/documentation/web/) page to see what else you can do with the WebViewer instance!
 
-## Build
+## WebViewer APIs
 
-Run `npm run build` to build the project. The compiled module will be stored in the `lib` directory.
+* [@pdftron/webviewer API documentation](https://docs.apryse.com/api/web/global.html#WebViewer__anchor)
+* [@pdftron/webviewer-react API documentation](https://github.com/ApryseSDK/webviewer-react)
+
+## Showcase
+
+Refer to a running sample on Apryse SDK [showcase page](https://showcase.apryse.com/).
+
+## Contributing
+
+Any submission to this repo is governed by these [guidelines](/CONTRIBUTING.md).
+
+
+## License
+
+For licensing, refer to [License](LICENSE).
+
+
+
