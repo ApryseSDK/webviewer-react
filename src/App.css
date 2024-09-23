@@ -1,0 +1,28 @@
+.App {
+  text-align: center;
+}
+
+
+#root, body, iframe{
+  height: 90vh;
+}
+
+.App, .webviewer{
+
+  height:90%;
+}
+
+.topHalf{
+  position: relative;
+  width: 48%;  
+  float: left;
+  padding-left:10px;
+}
+
+.bottomHalf{
+  position: relative;
+  width: 48%;
+  float: right;
+  border-left: 1px black solid;
+  padding-left:10px;
+}
