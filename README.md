@@ -25,17 +25,11 @@ Before you begin, make sure your development environment includes [Node.js and n
 2. IDE used in this sample is Visual Studio Code with an NPM extension to process commands within its terminal.
 3. [GitHub command line](https://github.com/git-guides/install-git) `git`.
 
-Inside your project at the level where your `package.json` exists, install the `webviewer` package.
-
-```
-npm i @pdftron/webviewer
-```
-
-Clone the repo to get the components to add them to your project.
+Clone the repo for `webviewer-react`. Inside the project at the level where `package.json` exists, install the `webviewer` package.
 
 ```
 git clone https://github.com/PDFTron/webviewer-react.git
-
+npm i @pdftron/webviewer
 ```
 
 ## Context API Components
@@ -45,7 +39,7 @@ Inside the app's component there are calls to two components:
 * `DocumentViewerProvider`
 * `DocumentViewerSimpleDisplay`
 
-```
+```diff
 //src/App.tsx
 
 import React from 'react';
@@ -60,21 +54,21 @@ function App() {
 
       <div className='topHalf'>
       <h2> DocumentViewerProvider Component</h2>
-        <DocumentViewerProvider className='documentViewerProvider' path={''}/>
++        <DocumentViewerProvider className='documentViewerProvider' path={''}/>
       </div>
 
     <div className='bottomHalf'>
     <h2> DocumentViewerSimpleDisplay Component</h2>
-     <DocumentViewerSimpleDisplay className='documentViewerSimpleDisplay' path={''}/>
++     <DocumentViewerSimpleDisplay className='documentViewerSimpleDisplay' path={''}/>
     </div>
    </div>
   );
 }
 ```
 
-You will need to copy the library assets from `./node_modules/@pdftron/webviewer/public` and place them at a location where you are able to serve them. In this sample project these library assets are copied over to `/public/lib/`. 
+The library assets from `./node_modules/@pdftron/webviewer/public` will be copied from the `postInstall` that is called autommatically with `npm install`. They will be placed at the `public/lib/` folder where you are able to serve them.  
 
-Extract the components, context, and utils resources from the cloned repo (https://github.com/PDFTron/webviewer-react.git), from a previous step, and add them to the react project in a similar structure in the `src` folder.
+The components, context, and utils resources from the cloned repo (https://github.com/PDFTron/webviewer-react.git), are in the following structure in the `src` folder.
 
 ```
 \src\components
@@ -82,9 +76,9 @@ Extract the components, context, and utils resources from the cloned repo (https
 \src\utils
 ```
 
-In this sample project there are two components defined that use the WebViewer, `DocumentViewerProvider` and `DocumentViewerSimpleDisplay`. Each component defines certain features and in this project are displayed in parallel. 
+The two components defined that use the WebViewer, `DocumentViewerProvider` and `DocumentViewerSimpleDisplay` define their own features and are displayed in parallel for this project. 
 
-This approach faciliates accessing the WebViewer instance at other places of the React app. Simply call the instance with either of the below tags.
+The Context API components implemented in this project, faciliate accessing the WebViewer instance at other places of the React app. To access and declare an instance of the WebViewer, it is done with a simple call with either of the below tags.
 
 ```
 <DocumentViewerProvider className='documentViewerProvider'/>
@@ -104,7 +98,7 @@ npm start
 
 ### Annotations
 
-If you want to create an annotation, just grab the annotationManager from the WebViewer instance, create an annotation object and add it to your document:
+If you want to create an annotation, just grab the `annotationManager` from the WebViewer instance, create an annotation object and add it to your document:
 
 ```
 const manager = instance.Core.annotationManager

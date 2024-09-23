@@ -1,11 +1,15 @@
+.App {
+  text-align: center;
+}
+
+
+#root, body, iframe{
+  height: 90vh;
+}
 
 .App, .webviewer{
 
   height:90%;
-}
-
-#root, body, iframe{
-  height: 90vh;
 }
 
 .topHalf{
